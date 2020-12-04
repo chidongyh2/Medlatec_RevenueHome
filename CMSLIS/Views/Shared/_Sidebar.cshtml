@@ -1,0 +1,52 @@
+﻿
+@using CMS_Core.Entity;
+@using CMS_Core.Implementtion;
+@{
+    var UserInfo = ((cms_Account)Context.Session["UserInfo"]);
+
+    if (UserInfo == null)
+    {
+        Response.Redirect("/account/login");
+    }
+    string url = Request.RawUrl.ToLower();
+    if (string.IsNullOrEmpty(url))
+    {
+        url = string.Empty;
+    }
+
+    
+
+    string menu = string.Empty;
+    menu = CMSLIS.Common.Common.RenderFinal(Convert.ToInt32(UserInfo.AccountTypeId), url);
+}
+
+<aside class="main-sidebar">
+    <section class="sidebar">
+        @* BEGIN Search *@
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        @* END Search *@
+        @* BEGIN Menu *@
+        <ul class="sidebar-menu" data-widget="tree">
+            @Html.Raw(menu)
+        </ul>
+        @* END Menu *@
+    </section>
+
+
+
+</aside>
+
+@*<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <span class="sr-only">Toggle navigation</span>
+</a>*@
+
+

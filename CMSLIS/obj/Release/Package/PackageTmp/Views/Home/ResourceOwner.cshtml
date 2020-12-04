@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "ResourceOwner";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/modal.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <br />
+        <a class="btn btn-default" href="/Home/Index">Authorization Code</a>&nbsp;&nbsp;
+        <a class="btn btn-default disabled" href="javascript:void(0)">Resource Owner Password</a>&nbsp;&nbsp;
+        @if (ViewBag.AccessToken != null)
+        {
+            <a class="btn btn-default" href="/Signature">Ký số</a>
+        }
+        <h2>Resource Owner Password grant</h2>
+        <p>Ứng dụng gửi trực tiếp thông tin đăng nhập của người dùng lên hệ thống để lấy <code>access_token</code></p><br /><br />
+        <form action="/Home/Login" method="post">
+            <div class="row">
+                <small class="col-md-6 col-md-offset-2">@ViewBag.Message</small>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-sm-2" for="Email">Email</label>
+                <div class="col-md-6">
+                    <input name="Email" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-sm-2" for="Password">Password</label>
+                <div class="col-md-6">
+                    <input name="Password" type="password" class="form-control" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-offset-2">
+                    <button class="btn btn-default" type="submit">Get Access Token</button>
+                    @if (ViewBag.AccessToken != null)
+                    {
+                        <a class="btn btn-success" href="/Home/RefreshToken?returnUrl=/Home/ResourceOwner">Refresh Token</a><br />
+                    }
+                </div>
+            </div>
+
+        </form>
+        <h4>Access Token and Refresh Token</h4>
+        <div class="row form-group">
+            <label class="control-label col-sm-2" for="AccessToken">AccessToken</label>
+            <div class="col-md-6">
+                <textarea name="AccessToken" class="form-control" rows="8" readonly>
+                    @ViewBag.AccessToken
+                </textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="control-label col-sm-2" for="RefreshToken">RefreshToken</label>
+            <div class="col-md-6">
+                <input name="RefreshToken" type="text" class="form-control" value="@ViewBag.RefreshToken" readonly />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

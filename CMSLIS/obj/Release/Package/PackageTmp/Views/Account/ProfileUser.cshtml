@@ -1,0 +1,171 @@
+﻿
+@model  CMS_Core.Entity.cms_Account
+@{
+    ViewBag.Title = "ProfileUser";
+
+}
+
+<script src="/Content/AdminLTE/js/Customer/ProfileUser.js"></script>
+
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+<!-- Begin Content -->
+<div class="box box-info">
+
+    <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="box box-info" style="margin-left: -5px;margin-top:10px;">
+            <div class="box-body box-profile">
+
+                <div class="mt-5" id="my_camera">
+                    <img src="/Content/assets/img/User.svg" alt="..." style="width: 120px;" class="profile-user-img img-responsive img-circle">
+                </div>
+
+                <h3 class="profile-username text-center">@Model.Username</h3>
+
+                <p class="text-muted text-center">@Model.Email</p>
+                <p class="text-muted text-center">@Model.Mobile</p>
+
+            </div>
+            <!-- /.box-body -->
+
+        </div>
+    </div>
+    <div class="col-md-9" style="margin-top:10px;">
+        @using (Html.BeginForm("ProfileUser", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+        {
+
+            <div class="box box-info">
+
+                <div class="box-body">
+                    <div class="widget-header bordered no-actions d-flex align-items-center">
+                        <h3>Cập nhật thông tin</h3>
+                    </div>
+
+
+                    <div class="col-10 ml-auto">
+                        <div class="section-title mt-3 mb-3">
+                            <h4>01. Thông tin cá nhân</h4>
+                        </div>
+                    </div>
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">UserName </label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", type = "SingleLine", placeholder = "UserName", disabled = "True" })
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", type = "hidden" })
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Họ và tên <span class="required">*</span></label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.Hoten, new { @class = "form-control", type = "SingleLine", placeholder = "Họ và tên" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Email <span class="required">*</span></label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "Họ và tên" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Số điện thoại<span class="required">*</span></label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", type = "number", placeholder = "Số điện thoại" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Ngày sinh</label>
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <div class="input-group date" data-plugin-datepicker data-date-format="dd/mm/yyyy">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.NgaysinhText, new { @class = "form-control", type = "text", id = "date", name = "date" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-10 ml-auto">
+                        <div class="section-title mt-3 mb-3">
+                            <h4>02. Thông tin khác</h4>
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Sở thích</label>
+                        <div class="col-lg-6">
+                            @Html.TextAreaFor(m => m.Sothich, new { @class = "form-control", @title = "Sở thích", rows = "3" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Facebook</label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.Fb, new { @class = "form-control", type = "SingleLine", placeholder = "Facebooks" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">instagram</label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.instagram, new { @class = "form-control", type = "SingleLine", placeholder = "instagram" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Ghi chú</label>
+                        <div class="col-lg-6">
+                            @Html.TextAreaFor(m => m.Ghichu, new { @class = "form-control", @title = "Ghi chú", rows = "3" })
+                        </div>
+                    </div>
+
+                    @Html.TextBoxFor(m => m.uid, new { @class = "checkbox-inline", Type = "hidden" })
+
+                    @Html.TextBoxFor(m => m.AccountTypeId, new { @class = "checkbox-inline", Type = "hidden" })
+                    <div class="em-separator separator-dashed"></div>
+                    <div class="text-center">
+                        <button type="submit" name="submit" id="SaveProfileUser" value="SaveProfileUser" class="btn btn-danger"> <i class="fa fa-save"></i>  Lưu (Alt + S)</button>
+                        <a id="backHome" href="/Home/index" class="btn btn-info"> <i class="fa fa-backward"></i>  Quay lại (Alt + Z) </a>
+
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+<!-- End Content -->
+
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+  

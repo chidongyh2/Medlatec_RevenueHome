@@ -1,0 +1,207 @@
+﻿
+@model  CMS_Medicons.Models.RevenueViewAgreeModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Thống kê doanh thu cá nhân";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+    float SumMoneyTotal = 0;
+
+    float SumPerTageTotal = 0;
+    float PayTotal = 0;
+    float PayTotalAgree = 0;
+}
+
+<script src="/Content/AdminLTE/js/Customer/RevenueByUserIDByDate.js"></script>
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+
+<!-- Begin Content -->
+<div class="box box-info">
+
+
+    @using (Html.BeginForm("RevenueByUserIDByDate", "RevenueHome", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                    <a href="#" class="fa fa-times"></a>
+                </div>
+
+                <h2 class="panel-title">
+                    Kết quả ngày: @Model.Patients[0].NgayThu.ToString("dd/MM/yyyyy")
+
+
+                </h2>
+            </header>
+
+            <!-- Begin Content -->
+            <div class="panel-body">
+
+                <table id="sorting-table" class="table table-bordered table-striped dataTable" role="grid" style="width: 2400px;">
+                    <thead>
+                        <tr>
+                            <th style="width:170px;">Xem chi tiết</th>
+                            <th style="width:160px;">Người thu</th>
+                            <th style="width:160px;">Ngày thu</th>
+                            <th style="width:170px;"> Nhóm doanh thu</th>
+                            <th style="width:170px;"> Đơn vị</th>
+                            <th style="width:140px;">SID</th>
+                            <th style="width:200px;">Tên bệnh nhân</th>
+                            <th style="width:120px;">Tổng tiền</th>
+                            <th style="width:120px;">Giảm giá</th>
+                            <th style="width:120px;">Phí đi lại</th>
+                            <th style="width:120px;">BHTT</th>
+                            <th style="width:120px;">BHBLTT</th>
+                            <th style="width:120px;">Thực thu</th>
+                            <th style="width:120px;">Tiền POS</th>
+                            <th style="width:120px;">Trả trước</th>
+                            <th style="width:120px;">Trả sau</th>
+                            <th style="width:120px;">Tiền còn phải nộp</th>
+                            <th style="width:200px;">Tiền cán bộ đồng ý</th>
+                            <th style="width:200px;">Nội dung Điều chỉnh</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Patients != null)
+                        {
+                            for (int i = 0; i < Model.Patients.Count; i++)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <a href="/RevenueHome/RevenueResult?SID=@Model.Patients[i].S_ID.Trim()&mabn=@Model.Patients[i].MaBN&userid=@Model.Patients[i].UserTC&Token=@CMSLIS.Common.Common.generalKeyPrivate(Model.Patients[i].S_ID.ToString().Trim())" id="Edit">
+                                            <i class="fa fa-camera fa-lg"></i>
+                                        </a>
+                                    </td>
+                                    <td>@Model.Patients[i].UserTC</td>
+                                    <td>@CMSLIS.Common.Common.ReFmtDate(Model.Patients[i].NgayThu)</td>
+                                    <td>@Model.Patients[i].GroupName</td>
+                                    <td>@Model.Patients[i].LocationName</td>
+                                    <td>@Model.Patients[i].S_ID</td>
+                                    <td>@Model.Patients[i].HoTen </td>
+                                    <td class="text-right" style="color:red;"> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].TongCP)  </td>
+                                    <td class="text-right" style="color:red;"> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].TienDiemPID + Model.Patients[i].TienGG)  </td>
+                                    <td class="text-right red" style="color:red;"> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].PhiDiLai)   </td>
+                                    <td class="text-right " style="color:red;"> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].BHTT)    </td>
+                                    <td class="text-right"> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].BHBLTT)  </td>
+                                    <td class="text-right  "> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].TongCP - Model.Patients[i].BHBLTT - Model.Patients[i].BHBLTT - Model.Patients[i].TienGG - Model.Patients[i].TienDiemPID)  </td>
+                                    <td class="text-right "> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].ThePOS)   </td>
+                                    <td class="text-right "> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].TraTruoc)   </td>
+                                    <td class="text-right "> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].TraSau)   </td>
+                                    <td class="text-right "> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].TongCP - Model.Patients[i].BHBLTT - Model.Patients[i].BHBLTT - Model.Patients[i].TienGG - Model.Patients[i].TienDiemPID - Model.Patients[i].ThePOS - Model.Patients[i].TraSau - Model.Patients[i].TraTruoc)   </td>
+                                    <td class="text-right "> @CMSLIS.Common.Common.FmtAmt(Model.Patients[i].SumAgree)   </td>
+                                   
+                                    <td>
+                                        @Model.Patients[i].Commentagree
+                                        <span style="display:none">
+
+                                            @(SumMoneyTotal = SumMoneyTotal + Model.Patients[i].TongCP );
+                                            @(SumPerTageTotal = SumPerTageTotal + Model.Patients[i].TongCP - Model.Patients[i].BHBLTT - Model.Patients[i].BHBLTT - Model.Patients[i].TienGG - Model.Patients[i].TienDiemPID );
+
+                                            @(PayTotal = PayTotal + (Model.Patients[i].TongCP - Model.Patients[i].BHBLTT - Model.Patients[i].BHBLTT - Model.Patients[i].TienGG - Model.Patients[i].TienDiemPID - Model.Patients[i].ThePOS - Model.Patients[i].TraSau - Model.Patients[i].TraTruoc) );
+                                            @(PayTotalAgree = PayTotalAgree + (Model.Patients[i].SumAgree) );
+                                        </span>
+
+                                    </td>
+
+
+                                    @Html.TextBoxFor(m => m.Patients[i].S_ID, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].MaBN, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].UserTC, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].LocationName, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].HoTen, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TongCP, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].ThucThu, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TamThu, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].PhiDiLai, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].LocationName, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TienMat, new { @class = "checkbox-inline", Type = "hidden" })
+
+                                    @Html.TextBoxFor(m => m.Patients[i].ThePOS, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TraTruoc, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].ChKhoan, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TraSau, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TienGG, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TenGG, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TienDiemPID, new { @class = "checkbox-inline", Type = "hidden" })
+
+                                    @Html.TextBoxFor(m => m.Patients[i].SumAgree, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].Typeagree, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].Typeagree1, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].Typeagree2, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].NgayThu, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].TenGG, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Patients[i].LocationID, new { @class = "checkbox-inline", Type = "hidden" })
+                                </tr>
+                            }
+                        }
+
+
+                     <tr>
+
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td>  </td>
+                                <td style="font-weight:bold;">Tổng</td>
+                                <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(SumMoneyTotal) (VNĐ)</td>
+                                <td> </td>
+                                <td> </td>
+                                <td>  </td>
+                                <td> </td>
+                                <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(SumPerTageTotal) (VNĐ)</td>
+                                <td>  </td>
+                                <td> </td>
+                                <td>  </td>
+                                <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(PayTotal) (VNĐ)</td>
+                                <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(PayTotalAgree) (VNĐ)</td>
+                                <td class="text-right"></td>
+
+                            </tr>
+                    </tbody>
+                </table>
+
+
+
+                <!-- End Sorting -->
+
+            </div>
+        </section>
+
+
+    }
+
+</div>
+<!-- End Content -->
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+<script src="/Content/AdminLTE/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+
+

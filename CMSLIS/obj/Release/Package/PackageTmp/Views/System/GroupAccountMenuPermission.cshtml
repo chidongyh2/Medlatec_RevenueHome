@@ -1,0 +1,142 @@
+﻿
+@model  CMSLIS.Models.GroupAccountMenuPermissionViewModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Phân quyền nhóm user";
+    CMS_Core.Common.ComboBoxFinal<cms_Menu> ComboBox = new CMS_Core.Common.ComboBoxFinal<cms_Menu>();
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+}
+
+<!-- Begin Content -->
+
+<script src="/Content/AdminLTE/js/Customer/GroupAccountMenuPermission.js"></script>
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+
+
+<!-- Begin Content -->
+<div class="box box-info">
+
+    @using (Html.BeginForm("GroupAccountMenuPermission", "System", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="box-body">
+          
+
+
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4 control-label-invisible " style="font-weight:bold;   ">Tên nhóm:  </label>
+                        <div class="col-xs-7">
+                            @Html.DropDownListFor(m => m.parentID, ComboBox.GetComboBoxBySelected(" SELECT    menid,    menname FROM    cms_menu where menstatus = 2  and cateId = 0 and menId in ( select menId from cms_GroupMenuPermision where GroupID = " + UserInfo.uid + " ) order by menid asc ", "menid", "menname", Model.parentID.ToString(), true), new { @class = "form-control select2", style = "width: 100%;", onchange = "SelectedValue(this)" })
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-sm-3">
+                    <div class="form-group">
+
+                        <button type="submit" id="cmdSearch" name="submit" value="SearchMenu" class="btn btn-primary"><i class="fa fa-search"></i>  Tìm kiếm</button>
+                        &nbsp;
+                        <button type="submit" id="SaveMenu" name="submit" value="SaveMenu" class="btn btn-danger" style="width:105px"><i class="fa fa-save"></i> Lưu</button>
+                    </div>
+                </div>
+
+
+          
+        </div>
+
+
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                    <a href="#" class="fa fa-times"></a>
+                </div>
+
+                <h2 class="panel-title">
+                    Kết quả tìm kiếm
+
+                    
+                </h2>
+            </header>
+
+            <!-- Begin Content -->
+            <div class="panel-body">
+
+                <table class="table table-bordered table-striped dataTable" role="grid">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkBoxAll" class="custom-checkbox" title="Trạng thái truy cập" />&nbsp; Trạng thái truy cập</th>
+                            <th>Menu cha</th>
+                            <th>Menu con</th>
+                            <th>Vị trí</th>
+                            <th>Link</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model._Menus != null)
+                        {
+
+                            for (int i = 0; i < Model._Menus.Count; i++)
+
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m._Menus[i].view, new { @class = "checkBox custom-checkbox chkCheckBoxId" })
+                                        @*<input type="checkbox" name="menId" value="@Model._Menus[i].menId" class="checkBox custom-checkbox chkCheckBoxId" checked="@Model._Menus[i].view" />*@
+                                    </td>
+                                    <td>@Model._Menus[i].menuParrent</td>
+                                    <td>@Model._Menus[i].menName </td>
+                                    <td>@Model._Menus[i].menOrd</td>
+                                    <td>@Model._Menus[i].menLinks  </td>
+
+
+                                    @Html.TextBoxFor(m => m._Menus[i].menId, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m._Menus[i].menuParrent, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m._Menus[i].menName, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m._Menus[i].menOrd, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m._Menus[i].menLinks, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.GroupID, new { @class = "checkbox-inline", Type = "hidden" })
+
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+
+
+
+                <!-- End Sorting -->
+
+            </div>
+        </section>
+
+    }
+</div>
+<!-- End Content -->
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+

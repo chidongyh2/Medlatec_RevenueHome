@@ -1,0 +1,123 @@
+﻿@model  CMS_Core.Entity.cms_Menu
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Thêm mới menu";
+    CMS_Core.Common.ComboBoxFinal<ClassComboBox> ComboBox = new CMS_Core.Common.ComboBoxFinal<ClassComboBox>();
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+}
+
+<script src="/Content/AdminLTE/js/Customer/MenuAdd.js"></script>
+
+
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+<!-- Begin Content -->
+<div class="box box-info">
+
+
+    @using (Html.BeginForm("MenuAdd", "System", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="box-body">
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Tên menu:<span class="required">*</span></label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.menName, new { @class = "form-control", type = "SingleLine", placeholder = "Tên menu" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Link menu:</label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.menLinks, new { @class = "form-control", type = "SingleLine", placeholder = "Link" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Menu cha</label>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.cateId, ComboBox.GetComboBoxBySelected("select menId as idfield, menName as namefield from cms_Menu where MENStatus = 2  and cateId = 0   order by menOrd asc ", "idfield", "namefield", Model.cateId.ToString(), true), new { @class = "form-control select2"  })
+
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Vị trí:</label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.menOrd, new { @class = "form-control", type = "number", placeholder = "Vị trí", value = "1" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Style:</label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.Style, new { @class = "form-control", type = "SingleLine", placeholder = "Style" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Tiêu đề:</label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.menTitle, new { @class = "form-control", type = "SingleLine", placeholder = "Tiêu đề" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Từ khóa:</label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.menKeyword, new { @class = "form-control", type = "SingleLine", placeholder = "Từ khóa" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Mô tả:</label>
+                <div class="col-xs-6">
+                    @Html.TextAreaFor(m => m.menDes, new { @class = "form-control", @title = "Ghi chú", rows = "4" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Display:</label>
+                <div class="col-xs-1">
+                    @Html.CheckBoxFor(m => m.view, new { @class = "minimal" })
+                </div>
+            </div>
+
+
+            <div class="form-group text-center">
+                <div class="col-xs-8">
+                    <button type="submit" id="SaveMenuAdd" name="submit" value="SaveMenuAdd" class="btn btn-danger"><i class="fa fa-save"></i> Lưu (Alt + S)</button>
+                    <a id="BackMenu" href="/System/Menu?parentID=@Model.parentID" class="btn btn-primary"><i class="fa fa-backward"></i>  Quay lại (Alt + Z) </a>
+                </div>
+            </div>
+            @Html.TextBoxFor(m => m.menId, new { @class = "checkbox-inline", Type = "hidden" })
+            @Html.TextBoxFor(m => m.parentID, new { @class = "checkbox-inline", Type = "hidden" })
+
+
+        </div>
+    }
+
+</div>
+<!-- End Form -->
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>

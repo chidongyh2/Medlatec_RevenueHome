@@ -1,0 +1,252 @@
+﻿@model  CMS_Medicons.Models.RevenueViewAgreeModel
+@using CMS_Core.Entity;
+@using CaptchaMvc.HtmlHelpers;
+
+@{
+    ViewBag.Title = "Duyệt ký xác nhận";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+
+
+    string LocationName = string.Empty;
+    if (Model.Patients != null)
+    {
+        if (Model.Patients.Count > 0)
+        {
+            LocationName = CMSLIS.Common.Common.FirstCharToUpper(Model.Patients[0].LocationName.ToLower());
+        }
+    }
+
+
+    var access_token = string.Empty;
+    if (Session["access_token"] != null)
+    {
+        access_token = Session["access_token"].ToString();
+    }
+
+}
+
+
+
+
+<script src="/Content/AdminLTE/js/Customer/RevenueByUserID.js"></script>
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+<!-- Begin Content -->
+<div class="box box-info">
+    @using (Html.BeginForm("RevenueOrderAgree", "RevenueHome", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(m => m.userid, new { @class = "checkbox-inline", Type = "hidden" })
+        <div class="box-body">
+
+
+            <div class="box-body">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4 " style="font-weight:bold;  ">Tìm theo ngày:</label>
+                        <div class="col-xs-7">
+                            <div class="input-group date" data-plugin-datepicker data-date-format="dd/mm/yyyy">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.tungay, new { @class = "form-control", placeholder = "Từ ngày", id = "date", name = "date" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" id="cmdSearch" name="submit" value="SearchRevenueOrderAgree" class="btn btn-primary"><i class="fa fa-search"></i>  Tìm kiếm</button>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-sm-12" style="height:10px;">
+
+        </div>
+
+        if (string.IsNullOrEmpty(access_token))
+        {
+            <div class="box-body">
+                <div class="col-sm-12">
+                    <div class="col-md-3 login-form-2">
+                    </div>
+                    <div class="col-md-6 login-form-2">
+                        <h3>Login chữ ký số VNPT</h3>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", type = "email", placeholder = "Your Email *" })
+                            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+
+
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", type = "password", placeholder = "Your Password *" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        <div class="form-group text-center ">
+                            <button type="submit" name="submit" class="btn btn-danger text-center" value="signinvnpt" style="height:40px;margin-bottom: 20px;" id="signin">Get Access Token</button>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-3 login-form-2">
+                    </div>
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        if (Model.Patients2 != null)
+        {
+            if (Model.Patients2.Count > 0)
+            {
+                <div class="form-group row ">
+
+
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Bạn đã ký duyệt doanh thu rồi. Xin cám ơn!</label>
+                        </div>
+                    </div>
+                </div>
+                if (!string.IsNullOrEmpty(Model.Patients2[0].pathpdf_Sign))
+                {
+                    <div id="example1" style="width:100%; height:700px;"></div>
+
+                    <script src="/Content/AdminLTE/js/pdfobject.min.js"></script>
+                    <script>
+                        var pathpdf_Sign = 'http://tainha.medcom.vn/@Model.Patients2[0].pathpdf_Sign.Replace("\\", "/")';
+
+                        PDFObject.embed(pathpdf_Sign, "#example1");</script>
+                }
+            }
+        }
+
+
+
+        if (Model.Patients != null)
+        {
+            if (Model.Patients.Count() > 0)
+            {
+                if (Model.Patients[0].type != 2)
+                {
+                    <div class="form-group row ">
+                        <div class="col-sm-12">
+                            <div class="form-group text-center ">
+                                @if (Model.Patients2.Count == 0)
+                                {
+                                    if (!string.IsNullOrEmpty(access_token))
+                                    {
+                                        <button type="submit" id="SaveRevenueOrderAgreee" name="submit" value="SaveRevenueOrderAgreee" class="btn btn-danger text-center" style="height:40px;margin-bottom: 20px;"><i class="fa fa-save"></i> Duyệt doanh thu</button>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+                if (!string.IsNullOrEmpty(Model.Patients[0].pathpdf))
+                {
+                    <div id="example1" style="width:100%; height:700px;"></div>
+
+                    <script src="/Content/AdminLTE/js/pdfobject.min.js"></script>
+                    <script>
+                        var pathpdf = 'http://tainha.medcom.vn/@Model.Patients[0].pathpdf.Replace("\\","/")';
+
+                        PDFObject.embed(pathpdf, "#example1");</script>
+                    //  PDFObject.embed(pathpdf, "#example1");</script>
+
+                }
+                else
+                {
+                    <div class="form-group row ">
+
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Hiện tại phiếu nộp tiền bạn chưa được kế toán xác nhận. Mời bạn liên hệ với kế toán để được xác nhận!</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+                if (Model.Patients2 != null)
+                {
+                    if (Model.Patients2.Count == 0)
+                    {
+                        <div class="form-group row ">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Hiện tại phiếu nộp tiền bạn chưa được kế toán xác nhận. Mời bạn liên hệ với kế toán để được xác nhận!</label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+        else
+        { <div class="form-group row ">
+
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Hiện tại phiếu nộp tiền bạn chưa được kế toán xác nhận. Mời bạn liên hệ với kế toán để được xác nhận!</label>
+                    </div>
+                </div>
+            </div> }
+
+
+
+
+
+
+        <!-- End Content -->
+    }
+</div>
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+<script src="/Content/AdminLTE/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+

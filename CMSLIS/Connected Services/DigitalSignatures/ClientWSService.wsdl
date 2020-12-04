@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://clientws.signserver.org/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ClientWSService" targetNamespace="http://clientws.signserver.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://clientws.signserver.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="customerLogin" type="tns:customerLogin" />
+      <xs:element name="customerLoginResponse" type="tns:customerLoginResponse" />
+      <xs:element name="generateOTP" type="tns:generateOTP" />
+      <xs:element name="generateOTPResponse" type="tns:generateOTPResponse" />
+      <xs:element name="processData" type="tns:processData" />
+      <xs:element name="processDataResponse" type="tns:processDataResponse" />
+      <xs:element name="processSOD" type="tns:processSOD" />
+      <xs:element name="processSODResponse" type="tns:processSODResponse" />
+      <xs:element name="queryClientTransactionLogbyEmailOrPhone" type="tns:queryClientTransactionLogbyEmailOrPhone" />
+      <xs:element name="queryClientTransactionLogbyEmailOrPhoneResponse" type="tns:queryClientTransactionLogbyEmailOrPhoneResponse" />
+      <xs:element name="validateData" type="tns:validateData" />
+      <xs:element name="validateDataResponse" type="tns:validateDataResponse" />
+      <xs:element name="validateOTP" type="tns:validateOTP" />
+      <xs:element name="validateOTPResponse" type="tns:validateOTPResponse" />
+      <xs:complexType name="queryClientTransactionLogbyEmailOrPhone">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="emailOrPhone" type="xs:string" />
+          <xs:element name="pageNumber" type="xs:int" />
+          <xs:element name="pageSize" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="queryClientTransactionLogbyEmailOrPhoneResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:wsClientTransactionLogs" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="wsClientTransactionLogs">
+        <xs:sequence>
+          <xs:element name="count" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="items" nillable="true" type="tns:wsClientTransactionLog" />
+          <xs:element name="pageCount" type="xs:int" />
+          <xs:element name="pageNumber" type="xs:int" />
+          <xs:element name="totalItemCount" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="wsClientTransactionLog">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="actionType" type="xs:string" />
+          <xs:element minOccurs="0" name="fileName" type="xs:string" />
+          <xs:element minOccurs="0" name="fileSize" type="xs:string" />
+          <xs:element minOccurs="0" name="processException" type="xs:string" />
+          <xs:element minOccurs="0" name="processStatus" type="xs:string" />
+          <xs:element minOccurs="0" name="remoteIP" type="xs:string" />
+          <xs:element minOccurs="0" name="requestId" type="xs:string" />
+          <xs:element minOccurs="0" name="requestTime" type="xs:long" />
+          <xs:element minOccurs="0" name="workerName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="validateData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="worker" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="metadata" type="tns:metadata" />
+          <xs:element minOccurs="0" name="data" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="metadata">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="validateDataResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="validateOTP">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="otp" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="validateOTPResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:otpResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="otpResponse">
+        <xs:sequence>
+          <xs:element name="code" type="xs:int" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="otp" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="generateOTP">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="otpReq" type="tns:otpRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="otpRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="apiPass" type="xs:string" />
+          <xs:element minOccurs="0" name="apiUser" type="xs:string" />
+          <xs:element minOccurs="0" name="contractId" type="xs:string" />
+          <xs:element minOccurs="0" name="enpoint" type="xs:string" />
+          <xs:element minOccurs="0" name="labelId" type="xs:string" />
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="templateId" type="xs:string" />
+          <xs:element minOccurs="0" name="userName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="generateOTPResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:otpResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="processSOD">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="worker" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="metadata" type="tns:metadata" />
+          <xs:element minOccurs="0" name="sodData" type="tns:sodRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sodRequest">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="dataGroup" type="tns:dataGroup" />
+          <xs:element minOccurs="0" name="ldsVersion" type="xs:string" />
+          <xs:element minOccurs="0" name="unicodeVersion" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="dataGroup">
+        <xs:simpleContent>
+          <xs:extension base="xs:base64Binary">
+            <xs:attribute name="id" type="xs:int" use="required" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="processSODResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:sodResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sodResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:dataResponse">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dataResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="archiveId" type="xs:string" />
+          <xs:element minOccurs="0" name="data" type="xs:base64Binary" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="metadata" nillable="true" type="tns:metadata" />
+          <xs:element name="requestId" type="xs:int" />
+          <xs:element minOccurs="0" name="signerCertificate" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="processData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="worker" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="metadata" type="tns:metadata" />
+          <xs:element minOccurs="0" name="data" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="processDataResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:dataResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customerLogin">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="emailOrPhone" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customerLoginResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:otpResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="SignServerException" type="tns:SignServerException" />
+      <xs:complexType name="SignServerException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="RequestFailedException" type="tns:RequestFailedException" />
+      <xs:complexType name="RequestFailedException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="InternalServerException" type="tns:InternalServerException" />
+      <xs:complexType name="InternalServerException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ClientNotAuthorizeException" type="tns:ClientNotAuthorizeException" />
+      <xs:complexType name="ClientNotAuthorizeException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="queryClientTransactionLogbyEmailOrPhone">
+    <wsdl:part name="parameters" element="tns:queryClientTransactionLogbyEmailOrPhone" />
+  </wsdl:message>
+  <wsdl:message name="validateData">
+    <wsdl:part name="parameters" element="tns:validateData" />
+  </wsdl:message>
+  <wsdl:message name="validateOTP">
+    <wsdl:part name="parameters" element="tns:validateOTP" />
+  </wsdl:message>
+  <wsdl:message name="validateDataResponse">
+    <wsdl:part name="parameters" element="tns:validateDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="generateOTP">
+    <wsdl:part name="parameters" element="tns:generateOTP" />
+  </wsdl:message>
+  <wsdl:message name="queryClientTransactionLogbyEmailOrPhoneResponse">
+    <wsdl:part name="parameters" element="tns:queryClientTransactionLogbyEmailOrPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="generateOTPResponse">
+    <wsdl:part name="parameters" element="tns:generateOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="customerLoginResponse">
+    <wsdl:part name="parameters" element="tns:customerLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="processDataResponse">
+    <wsdl:part name="parameters" element="tns:processDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="customerLogin">
+    <wsdl:part name="parameters" element="tns:customerLogin" />
+  </wsdl:message>
+  <wsdl:message name="SignServerException">
+    <wsdl:part name="SignServerException" element="tns:SignServerException" />
+  </wsdl:message>
+  <wsdl:message name="InternalServerException">
+    <wsdl:part name="InternalServerException" element="tns:InternalServerException" />
+  </wsdl:message>
+  <wsdl:message name="processSOD">
+    <wsdl:part name="parameters" element="tns:processSOD" />
+  </wsdl:message>
+  <wsdl:message name="processSODResponse">
+    <wsdl:part name="parameters" element="tns:processSODResponse" />
+  </wsdl:message>
+  <wsdl:message name="processData">
+    <wsdl:part name="parameters" element="tns:processData" />
+  </wsdl:message>
+  <wsdl:message name="RequestFailedException">
+    <wsdl:part name="RequestFailedException" element="tns:RequestFailedException" />
+  </wsdl:message>
+  <wsdl:message name="validateOTPResponse">
+    <wsdl:part name="parameters" element="tns:validateOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClientNotAuthorizeException">
+    <wsdl:part name="ClientNotAuthorizeException" element="tns:ClientNotAuthorizeException" />
+  </wsdl:message>
+  <wsdl:portType name="ClientWS">
+    <wsdl:operation name="queryClientTransactionLogbyEmailOrPhone">
+      <wsdl:input name="queryClientTransactionLogbyEmailOrPhone" message="tns:queryClientTransactionLogbyEmailOrPhone" />
+      <wsdl:output name="queryClientTransactionLogbyEmailOrPhoneResponse" message="tns:queryClientTransactionLogbyEmailOrPhoneResponse" />
+      <wsdl:fault name="SignServerException" message="tns:SignServerException" />
+    </wsdl:operation>
+    <wsdl:operation name="validateData">
+      <wsdl:input name="validateData" message="tns:validateData" />
+      <wsdl:output name="validateDataResponse" message="tns:validateDataResponse" />
+      <wsdl:fault name="RequestFailedException" message="tns:RequestFailedException" />
+      <wsdl:fault name="InternalServerException" message="tns:InternalServerException" />
+      <wsdl:fault name="ClientNotAuthorizeException" message="tns:ClientNotAuthorizeException" />
+    </wsdl:operation>
+    <wsdl:operation name="validateOTP">
+      <wsdl:input name="validateOTP" message="tns:validateOTP" />
+      <wsdl:output name="validateOTPResponse" message="tns:validateOTPResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="generateOTP">
+      <wsdl:input name="generateOTP" message="tns:generateOTP" />
+      <wsdl:output name="generateOTPResponse" message="tns:generateOTPResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processSOD">
+      <wsdl:input name="processSOD" message="tns:processSOD" />
+      <wsdl:output name="processSODResponse" message="tns:processSODResponse" />
+      <wsdl:fault name="RequestFailedException" message="tns:RequestFailedException" />
+      <wsdl:fault name="InternalServerException" message="tns:InternalServerException" />
+    </wsdl:operation>
+    <wsdl:operation name="processData">
+      <wsdl:input name="processData" message="tns:processData" />
+      <wsdl:output name="processDataResponse" message="tns:processDataResponse" />
+      <wsdl:fault name="RequestFailedException" message="tns:RequestFailedException" />
+      <wsdl:fault name="InternalServerException" message="tns:InternalServerException" />
+      <wsdl:fault name="ClientNotAuthorizeException" message="tns:ClientNotAuthorizeException" />
+    </wsdl:operation>
+    <wsdl:operation name="customerLogin">
+      <wsdl:input name="customerLogin" message="tns:customerLogin" />
+      <wsdl:output name="customerLoginResponse" message="tns:customerLoginResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClientWSServiceSoapBinding" type="tns:ClientWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="validateData">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="validateData">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="validateDataResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="RequestFailedException">
+        <soap:fault use="literal" name="RequestFailedException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InternalServerException">
+        <soap:fault use="literal" name="InternalServerException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ClientNotAuthorizeException">
+        <soap:fault use="literal" name="ClientNotAuthorizeException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="queryClientTransactionLogbyEmailOrPhone">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="queryClientTransactionLogbyEmailOrPhone">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="queryClientTransactionLogbyEmailOrPhoneResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SignServerException">
+        <soap:fault use="literal" name="SignServerException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateOTP">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="validateOTP">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="validateOTPResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generateOTP">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="generateOTP">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="generateOTPResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processSOD">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="processSOD">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processSODResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="RequestFailedException">
+        <soap:fault use="literal" name="RequestFailedException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InternalServerException">
+        <soap:fault use="literal" name="InternalServerException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processData">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="processData">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processDataResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="RequestFailedException">
+        <soap:fault use="literal" name="RequestFailedException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InternalServerException">
+        <soap:fault use="literal" name="InternalServerException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ClientNotAuthorizeException">
+        <soap:fault use="literal" name="ClientNotAuthorizeException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="customerLogin">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="customerLogin">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="customerLoginResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClientWSService">
+    <wsdl:port name="ClientWSPort" binding="tns:ClientWSServiceSoapBinding">
+      <soap:address location="http://10.0.0.124/signserver/ClientWSService/ClientWS" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,132 @@
+﻿@model  CMSLIS.Models.PermissionControlViewModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Phân quyền Control";
+    CMS_Core.Common.ComboBoxFinal<cms_Menu> ComboBox = new CMS_Core.Common.ComboBoxFinal<cms_Menu>();
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+}
+
+
+<script src="~/Content/assets/js/PermissionControl.js"></script>
+
+ 
+
+
+@using (Html.BeginForm("PermissionControl", "System", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="widget has-shadow">
+
+                <div class="form-group row d-flex align-items-center mb-5">
+                    @if (@ViewBag.TitleSuccsess != null)
+                    {
+                        <span class="text-danger justify-content-lg-end" style="margin-left: 22px;">
+                            @ViewBag.TitleSuccsess
+                        </span>
+                    }
+
+                </div>
+
+                <div class="form-group row d-flex align-items-center mb-5">
+                    <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Menu cha <span class="required">*</span></label>
+                    <div class="col-lg-2">
+                        @Html.DropDownListFor(m => m.MenParent, ComboBox.GetComboBoxBySelected(" SELECT  menid,menname FROM cms_menu where menstatus = 2  and parentid = 0 and menId in ( select menId from Sys_GroupMenuPermission where GroupID = " + UserInfo.AccountTypeId + " ) order by menid asc ", "menid", "menname", Model.MenParent.ToString(), true), new { @class = "form-control populate", onchange = "SelectedValueChild(this)" })                        
+                    </div>
+                    <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Menu Con <span class="required">*</span></label>
+                    <div class="col-lg-2">
+                        @Html.DropDownListFor(m => m.MenChild, ComboBox.GetComboBoxBySelected(" SELECT  menid,menname FROM cms_menu where menstatus = 2  and parentid != 0 and 1= 0 and menId in ( select menId from Sys_GroupMenuPermission where GroupID = " + UserInfo.AccountTypeId + " ) order by menid asc ", "menid", "menname", Model.MenChild.ToString(), true), new { @class = "form-control populate", id= "MenChild", name = "MenChild", onchange = "SelectedValue(this)" })                        
+                        @Html.TextBoxFor(m => m.GroupID, new { @class = "checkbox-inline", Type = "hidden" })
+
+                    </div>
+                    <button type="submit" id="cmdSearch" name="submit" value="SearchPermissionControl" class="btn btn-primary"><i class="fa fa-search"></i>  Tìm kiếm</button>
+                    &nbsp;
+                    <button type="submit" id="SavePermissionControl" name="submit" value="SavePermissionControl" class="btn btn-danger" style="width:105px"><i class="fa fa-save"></i> Lưu</button>
+                </div>
+
+                <div class="form-group row d-flex align-items-center mb-5">
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow">
+                <div class="widget-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0" id="example2">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="checkBoxAll" class="custom-checkbox" title="Trạng thái truy cập" />&nbsp; Truy cập</th>
+                                    <th>Menu</th>
+                                    <th>ID Control</th>
+                                    <th>Tên Control</th>
+                                    <th>Nhóm</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model._GroupMenuControlPermissions != null)
+                                {
+                                    for (int i = 0; i < Model._GroupMenuControlPermissions.Count; i++)
+
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.CheckBoxFor(m => m._GroupMenuControlPermissions[i].Permision, new { @class = "checkBox custom-checkbox chkCheckBoxId", @checked = @Model._GroupMenuControlPermissions[i].Permision })
+                                            </td>
+                                            <td>@Model._GroupMenuControlPermissions[i].MenLink </td>
+                                            <td>@Model._GroupMenuControlPermissions[i].ControlID</td>
+                                            <td>@Model._GroupMenuControlPermissions[i].ControlName</td>
+                                            <td>@Model._GroupMenuControlPermissions[i].GroupName</td>
+
+                                            @Html.TextBoxFor(m => m._GroupMenuControlPermissions[i].ID, new { @class = "checkbox-inline", Type = "hidden" })
+                                            @Html.TextBoxFor(m => m._GroupMenuControlPermissions[i].MenID, new { @class = "checkbox-inline", Type = "hidden" })
+                                            @Html.TextBoxFor(m => m._GroupMenuControlPermissions[i].GroupID, new { @class = "checkbox-inline", Type = "hidden" })
+                                            @Html.TextBoxFor(m => m._GroupMenuControlPermissions[i].ControlID, new { @class = "checkbox-inline", Type = "hidden" })
+                                            @Html.TextBoxFor(m => m._GroupMenuControlPermissions[i].MenLink, new { @class = "checkbox-inline", Type = "hidden" })
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Sorting -->
+
+        </div>
+    </div>
+    <!-- End Content -->
+}
+
+<!-- Begin Page Vendor Js -->
+<script src="/Content/assets/vendors/js/datatables/datatables.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/dataTables.buttons.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/jszip.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/buttons.html5.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/pdfmake.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/vfs_fonts.js"></script>
+<script src="/Content/assets/vendors/js/datatables/buttons.print.min.js"></script>
+<script src="/Content/assets/vendors/js/nicescroll/nicescroll.min.js"></script>
+<script src="/Content/assets/vendors/js/app/app.min.js"></script>
+
+<!-- End Page Vendor Js -->
+<!-- Begin Page Snippets -->
+<script src="/Content/assets/js/components/tables/tables.js"></script>
+<!-- End Page Snippets -->
+

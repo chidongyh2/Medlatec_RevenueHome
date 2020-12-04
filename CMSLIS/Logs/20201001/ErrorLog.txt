@@ -1,0 +1,20 @@
+﻿INFO 2020-10-01 03:28:30 – RevenueOrderAgree:Bước 1
+INFO 2020-10-01 03:28:36 – RevenueOrderAgree:Bước 1 d
+INFO 2020-10-01 03:28:37 – RevenueOrderAgree:System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Medicons.Controllers.RevenueHomeController.RevenueOrderAgree(RevenueViewAgreeModel obj, String submit) in D:\doanv\WEB\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 1661
+INFO 2020-10-01 03:30:37 – RevenueOrderAgree:Bước 1
+INFO 2020-10-01 03:30:59 – RevenueOrderAgree:Bước 1 d
+INFO 2020-10-01 03:30:59 – RevenueOrderAgree:System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Medicons.Controllers.RevenueHomeController.RevenueOrderAgree(RevenueViewAgreeModel obj, String submit) in D:\doanv\WEB\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 1661
+INFO 2020-10-01 03:31:36 – RevenueOrderAgree:Bước 1
+INFO 2020-10-01 03:31:51 – RevenueOrderAgree:Bước 1 d
+INFO 2020-10-01 03:31:51 – RevenueOrderAgree:System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Medicons.Controllers.RevenueHomeController.RevenueOrderAgree(RevenueViewAgreeModel obj, String submit) in D:\doanv\WEB\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 1661
+INFO 2020-10-01 03:32:56 – RevenueOrderAgree:Bước 1
+INFO 2020-10-01 03:33:07 – RevenueOrderAgree:Bước 1 d
+INFO 2020-10-01 03:33:21 – RevenueOrderAgree:System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Medicons.Controllers.RevenueHomeController.RevenueOrderAgree(RevenueViewAgreeModel obj, String submit) in D:\doanv\WEB\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 1661
+INFO 2020-10-01 03:40:09 – RevenueOrderAgree:Bước 1
+INFO 2020-10-01 03:40:19 – RevenueOrderAgree:Bước 1 d
+INFO 2020-10-01 03:40:19 – RevenueOrderAgree:System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Medicons.Controllers.RevenueHomeController.RevenueOrderAgree(RevenueViewAgreeModel obj, String submit) in D:\doanv\WEB\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 1663

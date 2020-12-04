@@ -1,0 +1,215 @@
+﻿@model  CMS_Medicons.Models.RevenueResultViewAgreeModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Danh sách dịch vụ theo SID";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+    float SumMoneyTotal = 0;
+
+    float SumPerTageTotal = 0;
+
+}
+
+
+<script src="/Content/AdminLTE/js/Customer/RevenueResult.js"></script>
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+
+<!-- Begin Content -->
+<div class="box box-info">
+    @using (Html.BeginForm("RevenueResult", "RevenueHome", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="box-body">
+
+
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label col-xs-4" style="font-weight:bold; ">Tìm theo: </label>
+                    <div class="col-xs-8">
+                        @Html.DropDownListFor(m => m.typeKeyword, this.ViewBag.GetTypeKeyword as List<SelectListItem>, new { @class = "form-control select2" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label col-xs-4 control-label-invisible " style="font-weight:bold; ">Từ khóa:  </label>
+                    <div class="col-xs-8">
+                        @Html.TextBoxFor(m => m.keyword, new { @class = "form-control", type = "SingleLine", placeholder = "Từ khóa tìm kiếm" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="form-group">
+
+                    <button type="submit" id="cmdSearch" name="submit" value="SearchRevenueResult" class="btn btn-primary"><i class="fa fa-search"></i>  Tìm kiếm</button>
+                    &nbsp;
+                    @*<button type="submit" id="SaveRevenueResult" name="submit" value="SaveRevenueResult" class="btn btn-danger" style="width:105px"><i class="fa fa-save"></i> Lưu</button>
+                    &nbsp; <button type="submit" id="ExportRevenueResult" name="submit" value="ExportRevenueResult" class="btn btn-danger" style="width:105px"><i class="fa fa-file-excel-o"></i> Export</button>*@
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="box-body">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label col-xs-12" style="font-weight:bold; ">THÔNG TIN DỊCH VỤ CỦA SID : @Model.sid.Trim() </label>
+
+                </div>
+            </div>
+
+        </div>
+
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                    <a href="#" class="fa fa-times"></a>
+                </div>
+
+                <h2 class="panel-title">
+                    Kết quả tìm kiếm
+
+
+                </h2>
+            </header>
+
+            <!-- Begin Content -->
+            <div class="panel-body">
+
+                <table class="table table-bordered table-striped dataTable" role="grid">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkBoxAll" class="custom-checkbox" title="Trạng thái truy cập" />&nbsp; Duyệt</th>
+                            <th>Người thu tiền</th>
+                            <th>SID</th>
+                            <th>Mã bệnh nhân</th>
+                            <th>Mã dịch vụ</th>
+                            <th>Tên dịch vụ</th>
+                            <th>Giá tiền</th>
+                            @*<th>Tiền đồng ý</th>
+                            <th>Nội dung phê duyệt</th>
+                            <th>Trạng thái duyệt</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Results != null)
+                        {
+
+                            for (int i = 0; i < Model.Results.Count; i++)
+
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Results[i].agree, new { @class = "checkBox custom-checkbox chkCheckBoxId" })
+                                    </td>
+
+                                    <td>@Model.userid</td>
+                                    <td>@Model.sid</td>
+                                    <td>@Model.Results[i].MaBN</td>
+                                    <td>@Model.Results[i].MaCP</td>
+                                    <td>@Model.Results[i].TenCP </td>
+
+                                    <td class="text-right">
+                                        @CMSLIS.Common.Common.FmtAmt(Model.Results[i].SL * Model.Results[i].DG)
+                                        <span style="display:none">
+
+                                            @if (Model.Results[i].agree)
+                                            {
+                                                @(SumMoneyTotal = SumMoneyTotal + (float)(Model.Results[i].SL * Model.Results[i].DG));
+                                            }
+                                            @(SumPerTageTotal = SumPerTageTotal + (float)(Model.Results[i].SL * Model.Results[i].DG));
+
+                                        </span>
+                                    </td>
+                                    @*<td class="text-right">
+                                        @if (Model.Results[i].agree)
+                                        {
+                                            @CMSLIS.Common.Common.FmtAmt(Model.Results[i].SL * Model.Results[i].DG)
+                                        }    
+                                        
+                                    </td>*@
+
+                                    @*<td>
+                                       
+
+                                    </td>*@
+                                    @*<td>@Model.Results[i].Typeagree</td>*@
+                                    @Html.TextBoxFor(m => m.Results[i].IDCT, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Results[i].MaBN, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Results[i].MaCP, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Results[i].SL, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.Results[i].DG, new { @class = "checkbox-inline", Type = "hidden" })
+
+                                    @Html.TextBoxFor(m => m.Results[i].Typeagree, new { @class = "checkbox-inline", Type = "hidden" })
+
+                                </tr>
+                            }
+                        }
+
+                                <tr>
+                                    @Html.TextBoxFor(m => m.sid, new { @class = "checkbox-inline", Type = "hidden" })
+
+
+                                    @Html.TextBoxFor(m => m.userid, new { @class = "checkbox-inline", Type = "hidden" })
+                                    @Html.TextBoxFor(m => m.mabn, new { @class = "checkbox-inline", Type = "hidden" })
+                                    <td></td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td style="font-weight:bold;">Tổng:</td>
+                                     
+                                    <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(SumMoneyTotal) (VNĐ)</td>
+
+                                    @*<td class="text-right"></td>
+                                    <td class="text-right"></td>*@
+
+                                </tr>
+                    </tbody>
+                </table>
+
+
+
+                <!-- End Sorting -->
+
+            </div>
+        </section>
+
+    }
+
+
+</div>
+<!-- End Content -->
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+<script src="/Content/AdminLTE/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+
+
+

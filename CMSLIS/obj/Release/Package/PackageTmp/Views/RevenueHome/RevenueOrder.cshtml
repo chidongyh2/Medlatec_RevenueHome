@@ -1,0 +1,361 @@
+﻿
+@model  CMS_Medicons.Models.RevenueViewAgreeModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Ký hợp đồng";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+    float SumMoneyTotal = 0;
+
+    float SumPerTageTotal = 0;
+    float PayTotal = 0;
+    float PayTotalAgree = 0;
+}
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<link href="/Content/AdminLTE/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/Content/AdminLTE/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/Content/AdminLTE/css/AdminLTE.css" rel="stylesheet" />
+
+<script src="/Content/AdminLTE/js/jquery-2.1.1.min.js"></script>
+<script src="/Content/AdminLTE/js/bootstrap.min.js"></script>
+
+
+<!-- Specific Page Vendor CSS -->
+<link rel="stylesheet" href="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="/Content/AdminLTE/stylesheets/theme.css" />
+
+
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+<body class="hold-transition" style="background-color: white !important;">
+    <!-- Begin Content -->
+    <section role="main" class="content-body" style="background-color:#ffffff; ">
+        <div class="row" style="background-color:#ffffff;margin-left:5px; margin-right:5px;">
+
+            <div class="col-sm-12" style="height:10px;">
+
+            </div>
+
+
+
+            <div class="form-group row ">
+
+                <div class="col-sm-12">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 " style="font-weight:bold;font-size:17px; "> CÔNG TY CP IN VIỆT THÁI </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 " style="font-weight:bold;font-size:15px; "> Địa chỉ: Số 3 ngõ 55/2 Trần Hòa,</label>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  text-center " style="font-weight:bold;font-size:15px; "> Mẫu số 02 - VT</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 " style="font-weight:bold;font-size:15px; "> Hoàng Mai, Hà Nội</label>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div style="font-weight:bold;font-size:20px;">  PHIẾU XUẤT KHO  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-weight:bold;font-size:15px;">Số: @CMSLIS.Common.Common.getNumber(Model.OrderExport.id) </span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  text-center " style="font-weight:bold;font-size:15px; "> (Ban hành theo Thông tư </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 " style="font-weight:bold;font-size:15px; ">Hotline: 036.473.6868</label>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div style=" font-size:15px;"> Ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <span style="font-weight:bold;font-size:15px;">Nợ: .........................</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  text-center " style="font-weight:bold;font-size:15px; ">  số 200/2014/TT-BTC Ngày </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-xs-4">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="col-sm-12">
+
+                    </div>
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  text-center " style="font-weight:bold;font-size:15px; "> 22/12/2014 của Bộ Tài chính) </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12" style="height:14px;">
+
+            </div>
+
+
+
+
+
+            <div class="form-group row ">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px; ">- Họ và tên người nhận hàng: ...................................................... Địa chỉ (bộ phận)........................................................................................</label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">- Lý do xuất kho: ....................................................................................................................................................................................................</label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">- Xuất tại kho (ngăn lô): ....................................................................SĐT ...........................................................................................................</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="col-sm-12" style="height:10px;">
+
+            </div>
+
+
+
+
+            @if (Model.OrderExport_details != null)
+            {
+                if (Model.OrderExport_details.Count() > 0)
+                {
+                    <!-- Begin Content -->
+                    <div class="form-group row ">
+
+                        <table id="sorting-table" class="table table-bordered table-striped mb-none">
+                            <thead>
+                                <tr>
+                                    <th id="STT" width="80px">Số TT</th>
+                                    <th id="SERVICETYPE_NAME" class="text-center" width="160px">Tên hàng hóa</th>
+                                    <th id="SERVICETYPE_NAME" class="text-center">Ghi chú</th>
+                                    <th id="SERVICETYPE_NAME" class="text-center" width="110px">Mã số</th>
+                                    <th id="Count_Service" class="text-center" width="80px">ĐVT</th>
+                                    <th id="Total_Price" class="text-center" width="100px">Số lượng</th>
+                                    <th id="Total_Price" class="text-center">Đơn giá</th>
+                                    <th id="Total_Price" class="text-center">Thành tiền</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.OrderExport_details != null)
+                                {
+                                    foreach (var data in Model.OrderExport_details)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @STT
+                                            </td>
+                                            <td style="font-weight:bold;text-align:left;width:160px;">  @data.ItemName</td>
+                                            <td style="font-weight:bold;text-align:left;">  @data.OrderNote</td>
+                                            <td style="font-weight:bold;text-align:right;width:110px;"> @data.codeItemExport </td>
+                                            <td style="font-weight:bold;text-align:right;width:80px;">  @data.ItemUnitName</td>
+                                            <td style="font-weight:bold;text-align:right;width:100px;">   @CMSLIS.Common.Common.FmtAmt(data.Amount)  </td>
+                                            <td style="font-weight:bold;text-align:right;width:120px;">  @CMSLIS.Common.Common.FmtAmt(data.Price) </td>
+                                            <td style="font-weight:bold;text-align:right;width:120px;">  @CMSLIS.Common.Common.FmtAmt(data.Price * data.Amount) </td>
+
+
+                                            <span style="display:none">
+                                                @(STT = STT + 1)
+                                                @(total = total + data.Price * data.Amount)
+
+                                            </span>
+                                        </tr>
+                                    }
+                                }
+
+                                <tr>
+
+                                    <td colspan="7" style="font-weight:bold;float:right;">Tổng</td>
+                                    <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(total)</td>
+
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!-- End Content -->
+
+                }
+            }
+
+
+            <div class="form-group row ">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">- Tổng số tiền (viết bằng chữ): @CMSLIS.Common.Common.DecimalToStringVietnamese((decimal)total, "VND") </label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">- Số chứng từ gốc kèm theo:................................................................................................................................................................................</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-12" style="height:8px;">
+
+            </div>
+
+
+            <div class="form-group row ">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style="font-weight:bold;font-size:15px; ">
+                            Người lập  phiếu
+
+                        </label>
+                        <label class="control-label col-xs-12 text-center " style="font-size:13px; ">
+                            (Ký, họ tên)
+
+                            </br>
+                            </br>
+                            </br>
+                            </br>
+                            @UserInfo.Hoten
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style="font-weight:bold;font-size:15px; ">
+                            Người nhận hàng
+                        </label>
+                        <label class="control-label col-xs-12 text-center " style="font-size:13px; ">
+                            (Ký, họ tên)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style="font-weight:bold;font-size:15px; ">
+                            Thủ kho
+                        </label>
+                        <label class="control-label col-xs-12 text-center " style="font-size:13px; ">
+                            (Ký, họ tên)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style="font-weight:bold;font-size:15px; ">
+                            Kế toán trưởng
+                        </label>
+                        <label class="control-label col-xs-12 text-center " style="font-size:13px; ">
+                            (Ký, họ tên)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style="font-weight:bold;font-size:15px; ">
+                            Giám đốc
+                        </label>
+                        <label class="control-label col-xs-12 text-center " style="font-size:13px; ">
+                            (Ký, họ tên)
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+        <div class="col-sm-12" style="height:2px;">
+
+        </div>
+
+
+
+    </section>
+    <!-- End Content -->
+
+</body>
+
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+
+
+
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+

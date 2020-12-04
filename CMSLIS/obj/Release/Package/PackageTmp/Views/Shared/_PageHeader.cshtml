@@ -1,0 +1,17 @@
+﻿ 
+
+@using CMSLIS.Models
+@{
+    var Model = (Tuple<string, string>)ViewBag.PageHeader;
+}
+
+
+@if (Model != null)
+{
+    <h1>
+        @Model.Item1
+        <small>@Model.Item2</small>
+    </h1>
+}
+
+

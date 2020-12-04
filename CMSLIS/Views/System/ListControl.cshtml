@@ -1,0 +1,160 @@
+﻿@model  CMSLIS.Models.ListControlViewModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "Danh sách Control trên url";
+    CMS_Core.Common.ComboBoxFinal<cms_Menu> ComboBox = new CMS_Core.Common.ComboBoxFinal<cms_Menu>();
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+}
+
+
+<!-- Begin Content -->
+
+
+@using (Html.BeginForm("ListControl", "System", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="widget has-shadow">
+
+                <div class="form-group row d-flex align-items-center mb-5">
+                    @if (@ViewBag.TitleSuccsess != null)
+                    {
+                        <span class="text-danger justify-content-lg-end" style="margin-left: 22px;">
+                            @ViewBag.TitleSuccsess
+                        </span>
+                    }
+
+                </div>
+
+                <div class="form-group row d-flex align-items-center mb-5">
+                    <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Menu cha <span class="required">*</span></label>
+                    <div class="col-lg-2">
+                        @Html.DropDownListFor(m => m.MenParent, ComboBox.GetComboBoxBySelected(" SELECT    menid,    menname FROM    cms_menu where menstatus = 2  and parentid = 0 and menId in ( select menId from Sys_GroupMenuPermission where GroupID = " + UserInfo.AccountTypeId + " ) order by menid asc ", "menid", "menname", Model.MenParent.ToString(), true), new { @class = "form-control populate", onchange = "SelectedValue(this)" })                        
+                    </div>
+                    <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Menu Con <span class="required">*</span></label>
+                    <div class="col-lg-2">
+                        @Html.DropDownListFor(m => m.MenChild, ComboBox.GetComboBoxBySelected(" SELECT    menid,    menname FROM    cms_menu where menstatus = 2  and parentid != 0 and  parentid =" + Model.MenParent +" and menId in ( select menId from Sys_GroupMenuPermission where GroupID = " + UserInfo.AccountTypeId + " ) order by menid asc ", "menid", "menname", Model.MenParent.ToString(), true), new { @class = "form-control populate", onchange = "SelectedValue(this)" })
+
+                     
+                    </div>
+                    <button type="submit" id="cmdSearch" name="submit" value="SearchListControl" class="btn btn-primary"><i class="fa fa-search"></i>  Tìm kiếm</button>
+                    &nbsp;                    
+                </div>
+
+                <div class="form-group row d-flex align-items-center mb-5">
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow">
+                <div class="widget-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0" id="example2">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Menu</th>
+                                    <th>ID Control</th>
+                                    <th>Tên Control</th>
+                                    <th>Mô tả</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngôn ngữ</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model._Menus != null)
+                                {
+                                    for (int i = 0; i < Model._Menus.Count; i++)
+
+                                    {
+                                        <tr>
+                                            <td>@Model._Menus[i].ID</td>
+                                            <td>@Model._Menus[i].menName </td>
+                                            <td>@Model._Menus[i].ControlID</td>
+                                            <td>@Model._Menus[i].ControlName</td>
+                                            <td>@Model._Menus[i].ControlDes</td>
+                                            <td>
+                                                @Html.DropDownListFor(m => m._Menus[i].ControlStatus, CMSLIS.Common.Common.GetStatus(Model._Menus[i].ControlStatus), new { @class = "form-control populate", id = "ControlStatus", name = "ControlStatus" })
+                                            </td>
+                                            <td>
+                                                @Html.DropDownListFor(m => m._Menus[i].LangID, CMSLIS.Common.Common.Getcms_Language(Model._Menus[i].LangID), new { @class = "form-control populate", id = "LangID", name = "LangID" })
+                                            </td>
+                                            <td>
+                                                <a class="Update" href="javascript:;">Update</a>
+
+                                            </td>
+                                            @Html.TextBoxFor(m => m._Menus[i].ID, new { @class = "checkbox-inline", Type = "hidden", name = "ID" })
+                                            @Html.TextBoxFor(m => m._Menus[i].menID, new { @class = "checkbox-inline menID", Type = "hidden", name = "menID" })
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                        <table class="table mb-0">
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(m => m._ControlName.ControlID, new { @class = "form-control", type = "SingleLine", placeholder = "ID Control" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m._ControlName.ControlName, new { @class = "form-control", type = "SingleLine", placeholder = "Tên Control" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m._ControlName.ControlDes, new { @class = "form-control", type = "SingleLine", placeholder = "Mô tả" })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(m => m._ControlName.ControlStatus, CMSLIS.Common.Common.GetStatus(), new { @class = "form-control populate", id = "ControlStatus", name = "ControlStatus" })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(m => m._ControlName.LangID, CMSLIS.Common.Common.Getcms_Language(), new { @class = "form-control populate", id = "LangID", name = "LangID" })
+                                </td>
+                                <td>
+                                    <button type="submit" id="SaveListControl" name="submit" value="SaveListControl" class="btn btn-danger mr-1 mb-2" style="width:105px"><i class="fa fa-save"></i> Lưu</button>
+                                </td>
+
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Sorting -->
+
+        </div>
+    </div>
+    <!-- End Content -->
+}
+
+<!-- Begin Page Vendor Js -->
+<script src="/Content/assets/vendors/js/datatables/datatables.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/dataTables.buttons.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/jszip.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/buttons.html5.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/pdfmake.min.js"></script>
+<script src="/Content/assets/vendors/js/datatables/vfs_fonts.js"></script>
+<script src="/Content/assets/vendors/js/tabledit/jquery.tabledit.js"></script>
+<script src="/Content/assets/vendors/js/datatables/buttons.print.min.js"></script>
+<script src="/Content/assets/vendors/js/nicescroll/nicescroll.min.js"></script>
+<script src="/Content/assets/vendors/js/app/app.min.js"></script>
+
+<!-- End Page Vendor Js -->
+<!-- Begin Page Snippets -->
+<script src="/Content/assets/js/components/tables/tables.js"></script>
+<!-- End Page Snippets -->
+
+<script src="/Content/assets/js/ListControl.js"></script>
+

@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7AECDA9C-D0E4-4477-8915-E26C66911ABB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMS_Core</RootNamespace>
+    <AssemblyName>CMS_Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CacheManager.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Core.1.2.0\lib\net45\CacheManager.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CacheManager.Memcached, Version=1.2.0.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Memcached.1.2.0\lib\net45\CacheManager.Memcached.dll</HintPath>
+    </Reference>
+    <Reference Include="Commons, Version=0.4.2.8580, Culture=neutral, PublicKeyToken=44382d1b57473eda">
+      <HintPath>..\packages\Memcached.ClientLibrary.1.0\lib\net20\Commons.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Oracle, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Oracle.1.0.3\lib\net452\Dapper.Oracle.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching, Version=2.16.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnyimMemcached.2.16.0\lib\net35\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <HintPath>..\packages\Memcached.ClientLibrary.1.0\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\Memcached.ClientLibrary.1.0\lib\net20\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Memcached.ClientLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=42c0400964dcc297, processorArchitecture=MSIL">
+      <HintPath>..\packages\Memcached.ClientLibrary.1.0\lib\net20\Memcached.ClientLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.18.6.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AES.cs" />
+    <Compile Include="Common\ComboBoxFinal.cs" />
+    <Compile Include="Common\ComboBoxFinalRevenue.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\Constant.cs" />
+    <Compile Include="Common\Field.cs" />
+    <Compile Include="Common\MemcacheConnection.cs" />
+    <Compile Include="Common\OracleServerConnection.cs" />
+    <Compile Include="Common\RandomGenerator.cs" />
+    <Compile Include="Common\SaltedHash.cs" />
+    <Compile Include="Common\SQLServerConnection.cs" />
+    <Compile Include="Common\SQLServerConnectionRevenue.cs" />
+    <Compile Include="Entity\Account_LogAction.cs" />
+    <Compile Include="Entity\Account_Login.cs" />
+    <Compile Include="Entity\Accs.cs" />
+    <Compile Include="Entity\ALL_ARGUMENTS.cs" />
+    <Compile Include="Entity\ApiKey.cs" />
+    <Compile Include="Entity\ApiToken.cs" />
+    <Compile Include="Entity\ClassComboBox.cs" />
+    <Compile Include="Entity\cms_Account.cs" />
+    <Compile Include="Entity\cms_AccountType.cs" />
+    <Compile Include="Entity\cms_Category.cs" />
+    <Compile Include="Entity\cms_CateItem.cs" />
+    <Compile Include="Entity\cms_CateMaterial.cs" />
+    <Compile Include="Entity\Cms_Color,cs.cs" />
+    <Compile Include="Entity\cms_Contact.cs" />
+    <Compile Include="Entity\cms_ControlName.cs" />
+    <Compile Include="Entity\cms_Customer.cs" />
+    <Compile Include="Entity\cms_customer_detail.cs" />
+    <Compile Include="Entity\cms_customer_Material.cs" />
+    <Compile Include="Entity\cms_customer_PayOrder.cs" />
+    <Compile Include="Entity\cms_debt_Customer.cs" />
+    <Compile Include="Entity\cms_debt_Produce.cs" />
+    <Compile Include="Entity\CMS_DEPARTMENT.cs" />
+    <Compile Include="Entity\CMS_GROUP_MEDICINE.cs" />
+    <Compile Include="Entity\cms_item.cs" />
+    <Compile Include="Entity\cms_Language.cs" />
+    <Compile Include="Entity\cms_Material.cs" />
+    <Compile Include="Entity\CMS_MEDICINE.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_EXPORT_DETAIL.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_EXPORT_STORE.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_INVENTORY.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_RECEIPT_DETAIL.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_RECEIPT_STORE.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_REFUND_DETAIL.cs" />
+    <Compile Include="Entity\CMS_MEDICINE_REFUND_STORE.cs" />
+    <Compile Include="Entity\cms_Menu.cs" />
+    <Compile Include="Entity\cms_News.cs" />
+    <Compile Include="Entity\cms_NewsSource.cs" />
+    <Compile Include="Entity\cms_NewsTags.cs" />
+    <Compile Include="Entity\cms_NewsTypeMessage.cs" />
+    <Compile Include="Entity\cms_News_Cate.cs" />
+    <Compile Include="Entity\cms_News_Images.cs" />
+    <Compile Include="Entity\cms_News_Map_Tags.cs" />
+    <Compile Include="Entity\cms_News_Relate.cs" />
+    <Compile Include="Entity\cms_Order.cs" />
+    <Compile Include="Entity\cms_OrderExport.cs" />
+    <Compile Include="Entity\cms_OrderExport_detail.cs" />
+    <Compile Include="Entity\cms_Order_Bill.cs" />
+    <Compile Include="Entity\cms_Order_Debt_Producte.cs" />
+    <Compile Include="Entity\CMS_PARTNER.cs" />
+    <Compile Include="Entity\CMS_PATIENT.cs" />
+    <Compile Include="Entity\CMS_PATIENTINFO.cs" />
+    <Compile Include="Entity\CMS_PATIENTINFO_APPOINTMENT.cs" />
+    <Compile Include="Entity\CMS_PATIENTINFO_QUEUE.cs" />
+    <Compile Include="Entity\CMS_PATIENTINFO_TOTAL.cs" />
+    <Compile Include="Entity\CMS_PATIENT_ALLERGY.cs" />
+    <Compile Include="Entity\CMS_PATIENT_HISTORY.cs" />
+    <Compile Include="Entity\CMS_PATIENT_IMAGES.cs" />
+    <Compile Include="Entity\CMS_PATIENT_PRESCRIPTION.cs" />
+    <Compile Include="Entity\CMS_PATIENT_SERVICE.cs" />
+    <Compile Include="Entity\CMS_PATIENT_SERVICE_REFUND.cs" />
+    <Compile Include="Entity\CMS_PATIENT_SERVICE_RESULT.cs" />
+    <Compile Include="Entity\cms_Permission.cs" />
+    <Compile Include="Entity\cms_Producer.cs" />
+    <Compile Include="Entity\CMS_REPORT_MEDICINE.cs" />
+    <Compile Include="Entity\CMS_REPORT_SERVICE.cs" />
+    <Compile Include="Entity\CMS_ROOM_CLINIC.cs" />
+    <Compile Include="Entity\CMS_SERVICE.cs" />
+    <Compile Include="Entity\CMS_SERVICE_GROUP.cs" />
+    <Compile Include="Entity\CMS_SERVICE_GROUP_CATE.cs" />
+    <Compile Include="Entity\CMS_SERVICE_TYPE.cs" />
+    <Compile Include="Entity\CMS_SICK.cs" />
+    <Compile Include="Entity\CMS_TEMPLATEPRINT.cs" />
+    <Compile Include="Entity\CMS_TEMPLATERESULTEXAMINATION.cs" />
+    <Compile Include="Entity\cms_Type.cs" />
+    <Compile Include="Entity\cms_TypeStatus.cs" />
+    <Compile Include="Entity\cms_type_Meterial.cs" />
+    <Compile Include="Entity\CMS_TYPE_TEMPLATEPRINT.cs" />
+    <Compile Include="Entity\cms_Unit.cs" />
+    <Compile Include="Entity\COLS_LENGTH.cs" />
+    <Compile Include="Entity\COMPLEMENT_SETTUP.cs" />
+    <Compile Include="Entity\Dashboard_Index.cs" />
+    <Compile Include="Entity\ImportMaterial.cs" />
+    <Compile Include="Entity\INFORMATION_SCHEMA_PARAMETERS.cs" />
+    <Compile Include="Entity\KQNhanLichSuKCBBS.cs" />
+    <Compile Include="Entity\KQNhanThongTinCSKCB.cs" />
+    <Compile Include="Entity\ListDashboard_Index.cs" />
+    <Compile Include="Entity\Location.cs" />
+    <Compile Include="Entity\PublicCalandar.cs" />
+    <Compile Include="Entity\ROWS_LENGTH.cs" />
+    <Compile Include="Entity\Sys_GroupMenuControlPermission.cs" />
+    <Compile Include="Entity\Sys_GroupMenuPermission.cs" />
+    <Compile Include="Entity\Sys_User.cs" />
+    <Compile Include="Entity\tblReportRevenue.cs" />
+    <Compile Include="Entity\tbl_Location.cs" />
+    <Compile Include="Entity\tbl_Patient.cs" />
+    <Compile Include="Entity\tbl_Result.cs" />
+    <Compile Include="Entity\tbl_Revenue.cs" />
+    <Compile Include="Entity\TEXTBOXTYPE.cs" />
+    <Compile Include="Entity\TYPECLASS.cs" />
+    <Compile Include="Entity\TYPEDATAINPUT.cs" />
+    <Compile Include="Entity\TYPEINPUT.cs" />
+    <Compile Include="Entity\VP.cs" />
+    <Compile Include="Implementtion\ImpAccount_LogAction.cs" />
+    <Compile Include="Implementtion\ImpAccount_Login.cs" />
+    <Compile Include="Implementtion\ImpALL_ARGUMENTS.cs" />
+    <Compile Include="Implementtion\ImpClassComboBox.cs" />
+    <Compile Include="Implementtion\ImpCms_Account.cs" />
+    <Compile Include="Implementtion\Impcms_AccountType.cs" />
+    <Compile Include="Implementtion\Impcms_Category.cs" />
+    <Compile Include="Implementtion\Impcms_CateItem.cs" />
+    <Compile Include="Implementtion\Impcms_CateMaterial.cs" />
+    <Compile Include="Implementtion\ImpCms_Color.cs" />
+    <Compile Include="Implementtion\Impcms_ControlName.cs" />
+    <Compile Include="Implementtion\Impcms_Customer.cs" />
+    <Compile Include="Implementtion\Impcms_customer_detail.cs" />
+    <Compile Include="Implementtion\Impcms_customer_Material.cs" />
+    <Compile Include="Implementtion\Impcms_debt_Customer.cs" />
+    <Compile Include="Implementtion\Impcms_debt_Produce.cs" />
+    <Compile Include="Implementtion\ImpCMS_DEPARTMENT.cs" />
+    <Compile Include="Implementtion\ImpCMS_GROUP_MEDICINE.cs" />
+    <Compile Include="Implementtion\Impcms_item.cs" />
+    <Compile Include="Implementtion\Impcms_Language.cs" />
+    <Compile Include="Implementtion\Impcms_Material.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_EXPORT_DETAIL.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_EXPORT_STORE.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_INVENTORY.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_RECEIPT_DETAIL.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_RECEIPT_STORE.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_REFUND_DETAIL.cs" />
+    <Compile Include="Implementtion\ImpCMS_MEDICINE_REFUND_STORE.cs" />
+    <Compile Include="Implementtion\Impcms_Menu.cs" />
+    <Compile Include="Implementtion\Impcms_News.cs" />
+    <Compile Include="Implementtion\Impcms_NewsSource.cs" />
+    <Compile Include="Implementtion\Impcms_NewsTypeMessage.cs" />
+    <Compile Include="Implementtion\Impcms_News_Cate.cs" />
+    <Compile Include="Implementtion\Impcms_News_Images.cs" />
+    <Compile Include="Implementtion\Impcms_Order.cs" />
+    <Compile Include="Implementtion\Impcms_OrderExport.cs" />
+    <Compile Include="Implementtion\Impcms_OrderExport_detail.cs" />
+    <Compile Include="Implementtion\Impcms_Order_Bill.cs" />
+    <Compile Include="Implementtion\Impcms_Order_Debt_Producte.cs" />
+    <Compile Include="Implementtion\ImpCMS_PARTNER.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENTINFO.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENTINFO_APPOINTMENT.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENTINFO_QUEUE.cs" />
+    <Compile Include="Implementtion\IMPCMS_PATIENTINFO_TOTAL.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_ALLERGY.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_HISTORY.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_IMAGES.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_PRESCRIPTION.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_SERVICE.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_SERVICE_REFUND.cs" />
+    <Compile Include="Implementtion\ImpCMS_PATIENT_SERVICE_RESULT.cs" />
+    <Compile Include="Implementtion\Impcms_Permission.cs" />
+    <Compile Include="Implementtion\Impcms_Producer.cs" />
+    <Compile Include="Implementtion\ImpCMS_REPORT_SERVICE.cs" />
+    <Compile Include="Implementtion\ImpCMS_ROOM_CLINIC.cs" />
+    <Compile Include="Implementtion\ImpCMS_SERVICE.cs" />
+    <Compile Include="Implementtion\ImpCMS_SERVICE_GROUP.cs" />
+    <Compile Include="Implementtion\ImpCMS_SERVICE_GROUP_CATE.cs" />
+    <Compile Include="Implementtion\ImpCMS_SERVICE_TYPE.cs" />
+    <Compile Include="Implementtion\ImpCMS_SICK.cs" />
+    <Compile Include="Implementtion\ImpCMS_TEMPLATEPRINT.cs" />
+    <Compile Include="Implementtion\ImpCMS_TEMPLATERESULTEXAMINATION.cs" />
+    <Compile Include="Implementtion\Impcms_Type.cs" />
+    <Compile Include="Implementtion\Impcms_TypeStatus.cs" />
+    <Compile Include="Implementtion\Impcms_type_Meterial.cs" />
+    <Compile Include="Implementtion\Impcms_Unit.cs" />
+    <Compile Include="Implementtion\ImpCOMPLEMENT_SETTUP.cs" />
+    <Compile Include="Implementtion\ImpDashboard_Index.cs" />
+    <Compile Include="Implementtion\ImpINFORMATION_SCHEMA_PARAMETERS.cs" />
+    <Compile Include="Implementtion\ImpSys_GroupMenuControlPermission.cs" />
+    <Compile Include="Implementtion\ImpSys_GroupMenuPermissioncs.cs" />
+    <Compile Include="Implementtion\ImptblReportRevenue.cs" />
+    <Compile Include="Implementtion\Imptbl_Location.cs" />
+    <Compile Include="Implementtion\Imptbl_Patient.cs" />
+    <Compile Include="Implementtion\Imptbl_Result.cs" />
+    <Compile Include="Implementtion\Imptbl_Revenue.cs" />
+    <Compile Include="Interface\IAccount_LogAction.cs" />
+    <Compile Include="Interface\IAccount_Login.cs" />
+    <Compile Include="Interface\IALL_ARGUMENTS.cs" />
+    <Compile Include="Interface\IClassComboBox.cs" />
+    <Compile Include="Interface\Icms_Account.cs" />
+    <Compile Include="Interface\Icms_AccountType.cs" />
+    <Compile Include="Interface\Icms_Category.cs" />
+    <Compile Include="Interface\Icms_CateItem.cs" />
+    <Compile Include="Interface\Icms_CateMaterial.cs" />
+    <Compile Include="Interface\ICms_Color.cs" />
+    <Compile Include="Interface\Icms_ControlName.cs" />
+    <Compile Include="Interface\Icms_Customer.cs" />
+    <Compile Include="Interface\Icms_customer_detail.cs" />
+    <Compile Include="Interface\Icms_customer_Material.cs" />
+    <Compile Include="Interface\Icms_debt_Customer.cs" />
+    <Compile Include="Interface\Icms_debt_Produce.cs" />
+    <Compile Include="Interface\ICMS_DEPARTMENT.cs" />
+    <Compile Include="Interface\ICMS_GROUP_MEDICINE.cs" />
+    <Compile Include="Interface\Icms_item.cs" />
+    <Compile Include="Interface\Icms_Language.cs" />
+    <Compile Include="Interface\Icms_Material.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_EXPORT_DETAIL.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_EXPORT_STORE.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_INVENTORY.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_RECEIPT_DETAIL.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_RECEIPT_STORE.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_REFUND_DETAIL.cs" />
+    <Compile Include="Interface\ICMS_MEDICINE_REFUND_STORE.cs" />
+    <Compile Include="Interface\Icms_Menu.cs" />
+    <Compile Include="Interface\Icms_News.cs" />
+    <Compile Include="Interface\Icms_NewsSource.cs" />
+    <Compile Include="Interface\Icms_NewsTags.cs" />
+    <Compile Include="Interface\Icms_NewsTypeMessage.cs" />
+    <Compile Include="Interface\Icms_News_Cate.cs" />
+    <Compile Include="Interface\Icms_News_Images.cs" />
+    <Compile Include="Interface\Icms_News_Map_Tags.cs" />
+    <Compile Include="Interface\Icms_News_Relate.cs" />
+    <Compile Include="Interface\Icms_Order.cs" />
+    <Compile Include="Interface\Icms_OrderExport.cs" />
+    <Compile Include="Interface\Icms_OrderExport_detail.cs" />
+    <Compile Include="Interface\Icms_Order_Bill.cs" />
+    <Compile Include="Interface\Icms_Order_Debt_Producte.cs" />
+    <Compile Include="Interface\ICMS_PARTNER.cs" />
+    <Compile Include="Interface\ICMS_PATIENT.cs" />
+    <Compile Include="Interface\ICMS_PATIENTINFO.cs" />
+    <Compile Include="Interface\ICMS_PATIENTINFO_APPOINTMENT.cs" />
+    <Compile Include="Interface\ICMS_PATIENTINFO_QUEUE.cs" />
+    <Compile Include="Interface\ICMS_PATIENTINFO_TOTAL.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_ALLERGY.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_HISTORY.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_IMAGES.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_PRESCRIPTION.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_SERVICE.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_SERVICE_REFUND.cs" />
+    <Compile Include="Interface\ICMS_PATIENT_SERVICE_RESULT.cs" />
+    <Compile Include="Interface\Icms_Permission.cs" />
+    <Compile Include="Interface\Icms_Producer.cs" />
+    <Compile Include="Interface\ICMS_REPORT_SERVICE.cs" />
+    <Compile Include="Interface\ICMS_ROOM_CLINIC.cs" />
+    <Compile Include="Interface\ICMS_SERVICE.cs" />
+    <Compile Include="Interface\ICMS_SERVICE_GROUP.cs" />
+    <Compile Include="Interface\ICMS_SERVICE_GROUP_CATE.cs" />
+    <Compile Include="Interface\ICMS_SERVICE_TYPE.cs" />
+    <Compile Include="Interface\ICMS_SICK.cs" />
+    <Compile Include="Interface\ICMS_TEMPLATEPRINT.cs" />
+    <Compile Include="Interface\ICMS_TEMPLATERESULTEXAMINATION.cs" />
+    <Compile Include="Interface\Icms_Type.cs" />
+    <Compile Include="Interface\Icms_TypeStatus.cs" />
+    <Compile Include="Interface\Icms_type_Meterial.cs" />
+    <Compile Include="Interface\Icms_Unit.cs" />
+    <Compile Include="Interface\ICOMPLEMENT_SETTUP.cs" />
+    <Compile Include="Interface\IDashboard_Index.cs" />
+    <Compile Include="Interface\IINFORMATION_SCHEMA_PARAMETERS.cs" />
+    <Compile Include="Interface\IRepository.cs" />
+    <Compile Include="Interface\IROWS_LENGTH.cs" />
+    <Compile Include="Interface\ISys_GroupMenuControlPermission.cs" />
+    <Compile Include="Interface\ISys_GroupMenuPermission.cs" />
+    <Compile Include="Interface\ItblReportRevenue.cs" />
+    <Compile Include="Interface\Itbl_Location.cs" />
+    <Compile Include="Interface\Itbl_Patient.cs" />
+    <Compile Include="Interface\Itbl_Result.cs" />
+    <Compile Include="Interface\Itbl_Revenue.cs" />
+    <Compile Include="Models\CatalogSystemViewModel.cs" />
+    <Compile Include="Models\CATEGORYSAddViewModel.cs" />
+    <Compile Include="Models\ExportStoreViewModel.cs" />
+    <Compile Include="Models\ListServiceViewModel.cs" />
+    <Compile Include="Models\OrderViewModels.cs" />
+    <Compile Include="Models\PatientViewModel.cs" />
+    <Compile Include="Models\ReceiptStoreViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,137 @@
+﻿@using CMS_Core.Entity;
+@model  CMSLIS.Models.SearchMenuViewModel
+
+@{
+    ViewBag.Title = "Danh sách đối tác";
+    var PARTNER = (List<CMS_PARTNER>)ViewBag.PARTNER;
+
+}
+
+
+<script src="/Content/AdminLTE/js/Customer/partner.js"></script>
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+<!-- Begin Content -->
+<div class="box box-info">
+    @using (Html.BeginForm("partner", "System", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form-horizontal" }))
+    {
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" style="font-weight:bold; margin-top:7px;">Trạng thái: </label>
+                        <div class="col-xs-8">
+                            @Html.DropDownListFor(m => m.Status, this.ViewBag.GetTypeStatus as List<SelectListItem>, new { @class = "form-control select2", style = "width: 100%;", onchange = "SelectedValueStatus(this)" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" id="cmdSearch" name="submit" value="Searchpartner" class="btn btn-primary"><i class="fa fa-search"></i>  Tìm kiếm</button>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    }
+
+    <!-- Sorting -->
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="fa fa-caret-down"></a>
+                <a href="#" class="fa fa-times"></a>
+            </div>
+
+            <h2 class="panel-title">
+                Kết quả tìm kiếm
+
+                @if (@ViewBag.TextErr != null)
+                {
+                    <span class="text-danger justify-content-lg-end">
+                        &nbsp;&nbsp;&nbsp;&nbsp;  @ViewBag.TextErr
+                    </span>
+                }
+            </h2>
+        </header>
+
+        <!-- Begin Content -->
+        <div class="panel-body">
+
+            <table id="sorting-table" class="table mb-0">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="checkBoxAll" class="custom-checkbox" /></th>
+                        <th>Tên đối tác</th>
+                        <th>Địa chỉ</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Người đại diện</th>
+                        <th>Mobile người đại diện</th>
+                        <th>Vị trí người đại diện</th>
+                        <th><span style="width:100px;">Trạng thái</span></th>
+                        <th>Ngày tạo</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (PARTNER != null)
+                    {
+                        foreach (var data in PARTNER)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="ID" value="@data.ID" class="checkBox custom-checkbox chkCheckBoxId" /></td>
+                                <td>@data.PARTNER_NAME</td>
+                                <td>@data.PARTNER_ADDRESS</td>
+                                <td>@data.PARTNER_MOBILE</td>
+                                <td>@data.PARTNER_EMAIL</td>
+                                <td>@data.PARTNER_SURROGATE</td>
+                                <td>@data.PARTNER_SURROGATE_MOBILE</td>
+                                <td>@data.PARTNER_SURROGATE_POSITION</td>
+
+                                <td style="width: 120px; ">@Html.Raw(CMSLIS.Common.Common.getTypeStatus(data.PARTNER_STATUS))</td>
+                                <td>@data.PARTNER_CREATE_DATE.ToString("dd/MM/yyyy HH:mm")</td>
+
+                                <td class="td-actions">
+                                    <a href="/System/MenuAdd?menId=@data.ID"><i class="fa fa-edit edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+
+            <button type="button" id="partnerAdd" class="btn btn-info mr-1 mb-2" onclick="location.href='@Url.Action("partnerAdd", "System")'"><i class="fa fa-plus-square-o"></i> Thêm mới</button>
+            <button type="button" id="partnerDelete" value="partnerDelete" class="btn btn-danger mr-1 mb-2" style="width:100px;" onclick="return ConfirmDelete();"><i class="fa fa-remove"></i> Xóa </button>
+            <button type="button" id="partnerPublic" value="partnerPublic" class="btn btn-info mr-1 mb-2" style="width:100px;" onclick="return ConfirmPublic();"><i class="fa fa-check-square-o"></i> Duyệt </button>
+        </div>
+        <!-- End Sorting -->
+    </section>
+    <!-- End Content -->
+
+</div>
+<!-- End Content -->
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>

@@ -1,0 +1,378 @@
+﻿@model  CMS_Medicons.Models.RevenueViewAgreeModel
+@using CMS_Core.Entity;
+@{
+    ViewBag.Title = "RevenueOrderpdf";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+    float SumMoneyTotal = 0;
+    float SumMoneyTotalPay = 0;
+    float PayTotalAgree = 0;
+    Layout = null;
+    int STT = 1;
+
+    string LocationName = string.Empty;
+    if (Model.Patients != null)
+    {
+        if (Model.Patients.Count > 0)
+        {
+            LocationName = CMSLIS.Common.Common.FirstCharToUpper(Model.Patients[0].LocationName.ToLower());
+        }
+    }
+}
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<link href="/Content/AdminLTE/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/Content/AdminLTE/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/Content/AdminLTE/css/AdminLTE.css" rel="stylesheet" />
+
+<script src="/Content/AdminLTE/js/jquery-2.1.1.min.js"></script>
+<script src="/Content/AdminLTE/js/bootstrap.min.js"></script>
+
+
+<!-- Specific Page Vendor CSS -->
+<link rel="stylesheet" href="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="/Content/AdminLTE/stylesheets/theme.css" />
+
+
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+<body class="hold-transition" style="background-color: white !important;">
+    <!-- Begin Content -->
+    <section role="main" class="content-body" style="background-color:#ffffff; ">
+        <div class="row" style="background-color:#ffffff;margin-left:5px; margin-right:5px;">
+
+            <div class="col-sm-12" style="height:10px;">
+
+            </div>
+
+
+
+            <div class="form-group row ">
+
+                <div class="col-sm-12">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 " style=" font-size:17px; float:left; margin-left:20px;font-style:italic;  "> Giấy nộp tiền của cán bộ thu ngân </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 " style="font-size:18px;text-align:right; font-style:italic; float:right; margin-right:10px;"> BM01. QTQLTN  </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ">
+
+                <div class="col-sm-12">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 " style="   border-bottom: 2px solid #e4e8f0;">  </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-12" style="height:14px;">
+
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-xs-3">
+                </div>
+                <div class="col-xs-8">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 " style="font-weight:bold;font-size:19px;text-align:center "> GIẤY NỘP TIỀN VÀO TÀI KHOẢN MEDLATEC </label>
+
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                </div>
+            </div>
+
+            <div class="form-group row ">
+                <div class="col-sm-12">
+                    <div class="col-xs-5">
+
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 " style="   border-bottom: 2px solid #e4e8f0;"> </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row ">
+
+                <div class="col-sm-12">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <img src="/Content/assets/img/logochuan-01.png" alt="logo" style="margin-top:-35px;">
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            </br>
+                            </br>
+                            <label class="control-label col-xs-12 " style="font-size:15px;text-align:right;font-weight:bold;   float:right; margin-right:10px; "> SỐ: @DateTime.Now.ToString("dd/MM")/@DateTime.Now.Year.ToString()</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="col-sm-12" style="height:14px;">
+
+            </div>
+
+
+
+
+
+            <div class="form-group row ">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-size:17px; ">Họ và tên người nộp tiền: @CMSLIS.Common.Common.FirstCharToUpper(Model.userid.ToLower()) </label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12  " style="font-size:17px;">Đơn vị công tác: @LocationName </label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        @if (Model.Patients != null)
+                        {
+                            if (Model.Patients.Count() > 0)
+                            {
+                                <label class="control-label col-xs-12  " style="font-size:17px;"> Lý do nộp tiền: Nộp tiền thu của khách hàng ngày @Model.Patients[0].NgayThu.Day.ToString() tháng @Model.Patients[0].NgayThu.Month.ToString() năm @Model.Patients[0].NgayThu.Year.ToString()  </label>
+                            }
+                        }
+                            </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="col-sm-12" style="height:10px;">
+
+            </div>
+
+
+
+
+            @if (Model.Patients != null)
+            {
+                if (Model.Patients.Count() > 0)
+                {
+                    <!-- Begin Content -->
+                    <div class="form-group row ">
+
+                        <table id="sorting-table" class="table table-bordered table-striped mb-none">
+                            <thead>
+                                <tr>
+                                    <th id="STT" width="70px" class="text-center">Số TT</th>
+                                    <th id="SERVICETYPE_NAME" class="text-center" width="170px">SID</th>
+                                    <th id="SERVICETYPE_NAME" class="text-center" width="230px">Tên khác hàng</th>
+                                    <th id="SERVICETYPE_NAME" class="text-center" width="90px">Số tiền</th>
+                                    <th id="Count_Service" class="text-center" width="90px">Đã trả</th>
+                                    <th id="Total_Price" class="text-center" width="90px">Hình thức</th>
+                                    <th id="Total_Price" class="text-center" width="90px">Còn lại</th>
+                                    <th id="Total_Price" class="text-center">Xác nhận</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Patients != null)
+                                {
+                                    foreach (var data in Model.Patients)
+                                    {
+                                        <tr>
+                                            <td class="text-center">
+                                                @STT
+                                            </td>
+                                            <td style=" text-align:left;width:160px;">  @data.S_ID</td>
+                                            <td style=" text-align:left;"> @CMSLIS.Common.Common.FirstCharToUpper(data.HoTen.ToLower())</td>
+                                            <td style=" text-align:right;width:90px;"> @CMSLIS.Common.Common.FmtAmt(data.TongCP) </td>
+                                            <td style=" text-align:right;width:90px;">  @CMSLIS.Common.Common.FmtAmt(data.BHBLTT + data.BHBLTT + data.TienGG + data.TienDiemPID + data.ThePOS + data.TraSau + data.TraTruoc)</td>
+                                            <td style=" text-align:right;width:80px;">   </td>
+                                            <td style=" text-align:right;width:90px;"> @CMSLIS.Common.Common.FmtAmt(data.TongCP - data.BHBLTT - data.BHBLTT - data.TienGG - data.TienDiemPID - data.ThePOS - data.TraSau - data.TraTruoc) </td>
+                                            <td style=" text-align:center;width:80px;">  v </td>
+
+                                            <span style="display:none">
+                                                @(STT = STT + 1)
+                                                @(SumMoneyTotal = SumMoneyTotal + data.TongCP )
+                                                @(SumMoneyTotalPay = SumMoneyTotalPay + data.BHBLTT + data.BHBLTT + data.TienGG + data.TienDiemPID + data.ThePOS + data.TraSau + data.TraTruoc )
+                                                @(PayTotalAgree = PayTotalAgree + data.TongCP - data.BHBLTT - data.BHBLTT - data.TienGG - data.TienDiemPID - data.ThePOS - data.TraSau - data.TraTruoc )
+
+                                            </span>
+                                        </tr>
+                                    }
+                                }
+
+                                <tr>
+
+                                    <td colspan="3" style="font-weight:bold;float:right;">Tổng</td>
+                                    <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(SumMoneyTotal)</td>
+                                    <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(SumMoneyTotalPay)</td>
+                                    <td></td>
+                                    <td class="text-right" style="font-weight:bold;">@CMSLIS.Common.Common.FmtAmt(PayTotalAgree)</td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!-- End Content -->
+                    <div class="form-group row ">
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12  " style="text-align:center ;font-size:16px;"> Tổng số tiền (viết bằng chữ): @CMSLIS.Common.Common.DecimalToStringVietnamese((decimal)PayTotalAgree, "VND") </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Tôi xác nhận đã thu số tiền trên của khách hàng và đề nghị SHB trích tiền từ tài khoản thấu chi của tôi trả cho MEDLATEC</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-12" style="height:8px;">
+
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group row ">
+
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Hiện tại phiếu nộp tiền bạn chưa được kế toán xác nhận. Mời bạn liên hệ với kế toán để được xác nhận!</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="form-group row ">
+
+
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12  " style="font-weight:bold;font-size:15px;">Hiện tại phiếu nộp tiền bạn chưa được kế toán xác nhận. Mời bạn liên hệ với kế toán để được xác nhận!</label>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+
+            <div class="form-group row ">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style="font-weight:bold;font-size:15px; ">
+                            <img src="@ViewBag.QRCodeImage " width="150px;">
+
+                        </label>
+
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 text-center " style=" font-size:16px; ">
+                            Hà Nội ngày @DateTime.Now.Day.ToString() tháng @DateTime.Now.Month.ToString() năm @DateTime.Now.Year.ToString()
+                        </label>
+                        </br>
+                        </br>
+                        <label class="control-label col-xs-12 text-center " style="font-size:17px;font-weight:bold; ">
+                            HỌ VÀ TÊN NGƯỜI NỘP TIỀN
+                        </label>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        <label class="control-label col-xs-12 text-center " style="font-size:16px;font-weight:bold; ">
+                            @CMSLIS.Common.Common.FirstCharToUpper(Model.userid.ToUpper())
+                        </label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+        <div class="col-sm-12" style="height:2px;">
+
+        </div>
+
+
+
+    </section>
+    <!-- End Content -->
+
+</body>
+
+<script src="/Content/AdminLTE/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="/Content/AdminLTE/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+
+
+
+<!-- Head Libs -->
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+
+
+

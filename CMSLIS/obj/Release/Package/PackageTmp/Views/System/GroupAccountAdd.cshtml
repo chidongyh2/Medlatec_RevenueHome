@@ -1,0 +1,71 @@
+﻿@model  CMS_Core.Entity.cms_AccountType
+@using CMS_Core.Entity;
+@{
+    // ViewBag.Title = "Thêm mới nhóm user";
+    CMS_Core.Common.ComboBoxFinal<CMS_PARTNER> ComboBox = new CMS_Core.Common.ComboBoxFinal<CMS_PARTNER>();
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+}
+
+<script src="/Content/AdminLTE/js/Customer/GroupAccountAdd.js"></script>
+<script src="/Content/AdminLTE/vendor/modernizr/modernizr.js"></script>
+
+<!-- Begin Form -->
+<div class="box box-info">
+
+    @using (Html.BeginForm("GroupAccountAdd", "System", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="box-body">
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Tên nhóm <span class="required">*</span> </label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.AName, new { @class = "form-control", type = "SingleLine", placeholder = "Tên nhóm" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" style="font-weight:bold; ">Mô tả </label>
+                <div class="col-xs-6">
+                    @Html.TextBoxFor(m => m.ADesc, new { @class = "form-control", type = "SingleLine", placeholder = "Mô tả" })
+                </div>
+            </div>
+
+          
+
+
+            @Html.TextBoxFor(m => m.AccountTypeId, new { @class = "checkbox-inline", Type = "hidden" })
+           
+
+                <div class="form-group text-center">
+                    <div class="col-xs-8">
+                        <button type="submit" name="submit" id="SaveGroupAccountAdd" value="SaveGroupAccountAdd" class="btn btn-danger"> <i class="fa fa-save"></i> Lưu (Alt + S)</button>
+                        <a id="BackGroupAccount" href="/System/GroupAccount" class="btn btn-primary"> <i class="fa fa-backward"></i>  Quay lại (Alt + Z) </a>
+                    </div>
+                </div>
+                </div>
+    }
+</div>
+<!-- End Form -->
+
+
+<script src="/content/AdminLTE/vendor/nanoscroller/nanoscroller.js"></script>
+
+<script src="/content/AdminLTE/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="/content/AdminLTE/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+<!-- Specific Page Vendor -->
+<script src="/Content/AdminLTE/vendor/select2/select2.js"></script>
+
+
+<!-- Theme Base, Components and Settings -->
+<script src="/Content/AdminLTE/javascripts/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/Content/AdminLTE/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/Content/AdminLTE/javascripts/theme.init.js"></script>
+ 

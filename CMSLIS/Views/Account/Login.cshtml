@@ -1,0 +1,171 @@
+﻿@model  CMSLIS.Models.LoginViewModel
+@using CaptchaMvc.HtmlHelpers;
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<!--
+Item Name: Elisyam - Web App & Admin Dashboard Template
+Version: 1.5
+Author: SAEROX
+
+** A license must be purchased in order to legally use this template for your project **
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MEDCOM - Login</title>
+    <meta name="description" content="CMS Medcom xây dựng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Google Fonts -->
+    <script src="/Content/assets/js/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });</script>
+    <!-- Favicon -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/Content/assets/img/logochuan-01.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Content/assets/img/logochuan-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Content/assets/img/logochuan-16.png">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/Content/assets/vendors/css/base/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/assets/vendors/css/base/elisyam-1.5.min.css">
+    <link rel="stylesheet" href="/Content/assets/css/animate/animate.min.css">
+
+    <script src="/Content/assets/js/html5shiv.min.js"></script>
+    <script src="/Content/assets/js/respond.min.js"></script>
+</head>
+<body class="bg-white">
+    <!-- Begin Preloader -->
+    <div id="preloader">
+        <div class="canvas">
+            <img src="/Content/assets/img/logochuan-01.png" alt="logo" class="loader-logo">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <!-- End Preloader -->
+    <!-- Begin Container -->
+    <div class="container-fluid no-padding h-100">
+        <div class="row flex-row h-100 bg-white">
+            <!-- Begin Left Content -->
+            <div class="col-xl-3 col-lg-5 col-md-5 col-sm-12 col-12 no-padding">
+                <div class="elisyam-bg background-03">
+                    <div class="elisyam-overlay overlay-08"></div>
+                    <div class="authentication-col-content-2 mx-auto text-center">
+                        <div class="logo-centered">
+                            <a href="/Account/Login">
+                                <img src="/Content/assets/img/logochuan-01.png" alt="logo">
+                            </a>
+                        </div>
+                        <h1>CMS MEDCOM</h1>
+                        <span class="description">
+                            Xin chào mừng bạn đến với trang quản trị Medcom
+                        </span>
+                        <ul class="login-nav nav nav-tabs mt-5 justify-content-center" role="tablist" id="animate-tab">
+                            <li><a class="active" data-toggle="tab" href="#singin" role="tab" id="singin-tab" data-easein="zoomInUp">Sign In</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Left Content -->
+            <!-- Begin Right Content -->
+            <div class="col-xl-9 col-lg-7 col-md-7 col-sm-12 col-12 my-auto no-padding">
+                <!-- Begin Form -->
+                <div class="authentication-form-2 mx-auto">
+                    <div class="tab-content" id="animate-tab-content">
+                        <!-- Begin Sign In -->
+                        <div role="tabpanel" class="tab-pane show active" id="singin" aria-labelledby="singin-tab">
+                            <h3>Sign In To MEDCOM</h3>
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="group material-input">
+                                    @Html.TextBoxFor(m => m.Username, new { type = "SingleLine", placeholder = "UserName" })
+                                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+
+                                </div>
+                                <div class="group material-input">
+                                    @Html.PasswordFor(m => m.Password, new { type = "password", placeholder = "Password" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+
+                                </div>
+
+                                if (ViewBag.countNOKLogin >= 3)
+                                {
+                                    <div class="group material-input">
+                                        @Html.Captcha("Try another", "Mời nhập Captcha:", 5, "Is required field", true)
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+
+                                    </div>
+                                }
+
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <div class="styled-checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)
+                                        </div>
+                                    </div>
+                                    <div class="col text-right">
+                                        <a href="/Account/ForgotPassword">Forgot Password ?</a>
+                                    </div>
+                                </div>
+                                <div class="sign-btn text-center">
+                                    <button type="submit" class="btn btn-lg btn-gradient-01" id="signin">Sign In</button>
+                                </div>
+
+                            }
+                        </div>
+                        <!-- End Sign In -->
+
+                    </div>
+                </div>
+                <!-- End Form -->
+            </div>
+            <!-- End Right Content -->
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+    <!-- Begin Vendor Js -->
+    <script src="/Content/assets/vendors/js/base/jquery.min.js"></script>
+    <script src="/Content/assets/vendors/js/base/core.min.js"></script>
+    <!-- End Vendor Js -->
+    <!-- Begin Page Vendor Js -->
+    <script src="/Content/assets/vendors/js/app/app.min.js"></script>
+    <!-- End Page Vendor Js -->
+    <!-- Begin Page Snippets -->
+    <script src="/Content/assets/js/components/tabs/animated-tabs.min.js"></script>
+
+    <script language="JavaScript">
+        $(document).ready(function () {
+            document.onkeydown = function () {
+                var key_enter = 13; // 13 = Enter
+                if (key_enter == event.keyCode) {
+                    event.keyCode = 0;
+                    document.getElementById('signin').click();
+                    return false;
+                }
+            }
+    </script>               
+    
+    
+</body >
+</html >
+

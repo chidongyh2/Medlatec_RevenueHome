@@ -1,0 +1,7 @@
+﻿INFO 2020-08-14 02:43:04 – SelectQueryCommand: System.InvalidOperationException: No columns were selected
+   at Dapper.SqlMapper.GetTypeDeserializerImpl(Type type, IDataReader reader, Int32 startBound, Int32 length, Boolean returnNullIfFirstMissing)
+   at Dapper.SqlMapper.TypeDeserializerCache.GetReader(IDataReader reader, Int32 startBound, Int32 length, Boolean returnNullIfFirstMissing)
+   at Dapper.SqlMapper.TypeDeserializerCache.GetReader(Type type, IDataReader reader, Int32 startBound, Int32 length, Boolean returnNullIfFirstMissing)
+   at Dapper.SqlMapper.GetDeserializer(Type type, IDataReader reader, Int32 startBound, Int32 length, Boolean returnNullIfFirstMissing)
+   at Dapper.SqlMapper.GridReader.ReadImpl[T](Type type, Boolean buffered)
+   at CMS_Core.Common.SQLServerConnectionRevenue`1.SelectQueryCommand(String spName, Object[] values) in D:\doanv\WEB\Medcom_RevenueHome\CMS_Core\Common\SQLServerConnectionRevenue.cs:line 60

@@ -1,0 +1,58 @@
+﻿@using CMSLIS.Models
+@{
+    var Model = (List<Message>)ViewBag.Breadcrumb;
+}
+
+
+@if (Model != null)
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Home/index">Trang chủ</a></li>
+        @foreach (var message in Model)
+        {
+            if (Model.Last() == message)
+            {
+                <li class="breadcrumb-item active"><a href="@message.URLPath">@message.DisplayName</a> </li>
+            }
+            else
+            {
+                <li class="breadcrumb-item"><a href="@message.URLPath">@message.DisplayName</a></li>
+            }
+        }
+    </ol>
+
+}
+ 
+
+
+
+@*@if (Model != null)
+{
+    <!-- Begin Page Header-->
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">@Model[Model.Count - 1].DisplayName</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/index"><i class="ti ti-home"></i></a></li>
+
+                        @foreach (var message in Model)
+                        {
+                            if (Model.Last() == message)
+                            {
+                                <li class="breadcrumb-item active"><a href="@message.URLPath"> @message.DisplayName </a></li>
+                            }
+                            else
+                            {
+                                <li class="breadcrumb-item"> @message.DisplayName </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+}*@

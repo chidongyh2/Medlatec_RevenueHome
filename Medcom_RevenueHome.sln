@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medcom_RevenueHome", "CMSLIS\Medcom_RevenueHome.csproj", "{D3922A83-AA25-4AC0-BEE0-542DBBEB78E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS_Core", "CMS_Core\CMS_Core.csproj", "{7AECDA9C-D0E4-4477-8915-E26C66911ABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3922A83-AA25-4AC0-BEE0-542DBBEB78E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3922A83-AA25-4AC0-BEE0-542DBBEB78E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3922A83-AA25-4AC0-BEE0-542DBBEB78E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3922A83-AA25-4AC0-BEE0-542DBBEB78E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AECDA9C-D0E4-4477-8915-E26C66911ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AECDA9C-D0E4-4477-8915-E26C66911ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AECDA9C-D0E4-4477-8915-E26C66911ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AECDA9C-D0E4-4477-8915-E26C66911ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A415F533-38C2-4EA8-81FE-CD2FA2A5BE91}
+	EndGlobalSection
+EndGlobal
