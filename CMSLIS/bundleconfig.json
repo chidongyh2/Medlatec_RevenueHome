@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "Content/AdminLTE/css/AdminLTE.min.css",
+    "inputFiles": [
+      "Content/AdminLTE/css/AdminLTE.css"
+    ]
+  }
+]

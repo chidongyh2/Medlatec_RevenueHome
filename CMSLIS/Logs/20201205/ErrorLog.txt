@@ -1,0 +1,43 @@
+﻿INFO 2020-12-05 08:20:11 – GetAccount_LoginNOKByUsername: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Core.Common.SQLServerConnection`1.SelectQueryCommand(String spName, Object[] values) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\SQLServerConnection.cs:line 31
+   at CMS_Core.Implementtion.ImpAccount_Login.GetAccount_LoginNOKByUsername(String Username) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Implementtion\ImpAccount_Login.cs:line 67
+INFO 2020-12-05 08:20:12 – Getcms_Account: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Core.Common.SQLServerConnection`1.SelectQueryCommand(String spName, Object[] values) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\SQLServerConnection.cs:line 31
+   at CMS_Core.Implementtion.ImpCms_Account.Getcms_Account(String Username, String Password) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Implementtion\ImpCms_Account.cs:line 183
+INFO 2020-12-05 08:20:13 – InsertAccount_Login: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CMS_Core.Common.SQLServerConnection`1.ExecuteInsert(String spName, Object[] values) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\SQLServerConnection.cs:line 113
+   at CMS_Core.Implementtion.ImpAccount_Login.InsertAccount_Login(Account_Login account_Login) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Implementtion\ImpAccount_Login.cs:line 97
+INFO 2020-12-05 11:11:23 – RevenueTotalAll:System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:6001
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Core.Common.HttpClientService.<GetAsync>d__9`1.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 73
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Medicons.Controllers.RevenueHomeController.<TrackingStatistic>d__50.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 4804
+INFO 2020-12-05 11:12:07 – RevenueTotalAll:System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:6001
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Core.Common.HttpClientService.<GetAsync>d__9`1.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 73
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Medicons.Controllers.RevenueHomeController.<TrackingStatistic>d__50.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 4804

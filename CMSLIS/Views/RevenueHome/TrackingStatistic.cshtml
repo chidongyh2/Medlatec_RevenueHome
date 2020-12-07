@@ -1,0 +1,31 @@
+﻿@using CMS_Core.Entity;
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@{
+
+    ViewBag.Title = "Biểu đồ theo dõi cán bộ tại nhà";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+    var jsonSerializerSettings = new JsonSerializerSettings
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+}
+
+<!-- Begin Content -->
+<!-- Head Libs -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0WbnCW-4VyH12hpIjUeUFXqToSLw9bT8&callback=initMap&libraries=&v=weekly"
+            defer></script>
+<!-- Begin Content -->
+
+<div class="box box-info">
+    <div class="box-body">
+        <!--The div element for the map -->
+        <div id="tracking-map"></div>
+    </div>
+</div>
+<!-- End Content -->
+
+<script>
+    var locations = @(ViewBag.ListLocation != null ? Html.Raw(JsonConvert.SerializeObject(ViewBag.ListLocation, jsonSerializerSettings)) : "[]");
+</script>
+<script src="~/Content/AdminLTE/js/Customer/TrackingSatistic.js"></script>

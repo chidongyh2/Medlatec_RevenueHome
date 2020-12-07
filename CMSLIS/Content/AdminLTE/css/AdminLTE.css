@@ -5004,3 +5004,7 @@ border-bottom-width: 0;
     color: #fff;
 }
 
+#tracking-map {
+    height: 84vh;
+    width: 100%;
+}

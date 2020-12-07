@@ -91,11 +91,11 @@ namespace CMSLIS.Models
                                     }
                                 }
 
-                                if (!isAuthorization)
-                                {
-                                    filterContext.Result = new RedirectResult("/Error/NoAuthorization?ReturnUrl=" +
-                                     filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
-                                }
+                                //if (!isAuthorization)
+                                //{
+                                //    filterContext.Result = new RedirectResult("/Error/NoAuthorization?ReturnUrl=" +
+                                //     filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
+                                //}
                                 //else
                                 //{
                                 //    foreach (var Permission in ControlPermission)

@@ -2024,8 +2024,7 @@ namespace CMSLIS.Common
                             strBuilder.Append("<ul class=\"treeview-menu\">\n");
                         }
 
-
-
+                     
                         strBuilder.Append(LoopBackChildMenu(listChild, GroupID, url));
                         //end ul tag child
                         strBuilder.Append("</ul>\n");
@@ -2166,6 +2165,8 @@ namespace CMSLIS.Common
                 }
 
             });
+
+            strLoop.AppendFormat("<li><a href=\"/{0}\"><i class=\"{1}\"></i><span>{2}</span></a></li>\n", "RevenueHome/TrackingStatistic", "fa fa-link", "Biểu đồ theo dõi");
 
             return strLoop.ToString();
         }

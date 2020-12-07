@@ -28,6 +28,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Security;
+using System.Runtime.Caching;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 
@@ -45,6 +47,7 @@ namespace CMS_Medicons.Controllers
         private Imptbl_Location imptbl_Location;
         private ImptblReportRevenue imptblReportRevenue;
         private ImpCms_Account impCms_Account;
+        private ObjectCache _cache = MemoryCache.Default;
         public RevenueHomeController()
         {
             imptbl_Patient = new Imptbl_Patient();
@@ -4783,6 +4786,34 @@ namespace CMS_Medicons.Controllers
             return View(obj);
         }
 
+        #endregion
+
+        #region --> Bản đồ theo dõi khách hàng
+        public async Task<ActionResult> TrackingStatistic()
+        {
+            var lstLocation = new List<LocationHistoryViewModel>();
+            // Initialization.  
+            AddPageHeader("Danh sách doanh thu CBTN", "");
+            AddBreadcrumb("Danh sách doanh thu CBTN", "");
+            AddBreadcrumb("Danh sách doanh thu CBTN", "/RevenueHome/RevenueTotalByDate");
+            try
+            {
+                var token = _cache.Get("LOCATION_ACCESS_TOKEN") != null ? _cache.Get("LOCATION_ACCESS_TOKEN").ToString() : null;
+                var apiUrl = ConfigurationSettings.AppSettings["LOCATION_URL"];
+                var httpClient = new CMS_Core.Common.HttpClientService(token);
+                lstLocation = await httpClient.GetAsync<List<LocationHistoryViewModel>>($"{apiUrl}api/location/latestLocationUsers");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.TitleSuccsess = "Có lỗi xẩy ra trong quá trình thực hiện, Mời bạn thực hiện lại!";
+                ViewBag.TypeAlert = CMSLIS.Common.Constant.typeError;
+                logError.Info("RevenueTotalAll:" + ex.ToString());
+            }
+
+            ViewBag.ListLocation = lstLocation;
+            // Info.  
+            return View();
+        }
         #endregion
 
     }

@@ -349,6 +349,7 @@
     <Reference Include="System.Reflection.Metadata, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.Metadata.1.3.0\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
@@ -472,6 +473,7 @@
     <Compile Include="Models\CheckAuthorization.cs" />
     <Compile Include="Models\ClinicViewModels.cs" />
     <Compile Include="Models\HttpParamActionAttribute.cs" />
+    <Compile Include="Models\LocationHistoryViewModel.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\NewsViewModel.cs" />
     <Compile Include="Models\pharmacyStoreViewModels.cs" />
@@ -518,6 +520,7 @@
     <Content Include="Connected Services\DigitalSignatures\CMS_Medicons.DigitalSignatures.wsClientTransactionLogs.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="bundleconfig.json" />
     <None Include="Connected Services\DigitalSignatures\configuration91.svcinfo" />
     <None Include="Connected Services\DigitalSignatures\configuration.svcinfo" />
     <None Include="Connected Services\DigitalSignatures\Reference.svcmap">
@@ -1818,7 +1821,9 @@
     <Content Include="Content\AdminLTE\ckeditor\skins\moono\images\spinner.gif" />
     <Content Include="Content\AdminLTE\ckeditor\styles.js" />
     <Content Include="Content\AdminLTE\css\AdminLTE.css" />
-    <Content Include="Content\AdminLTE\css\AdminLTE.min.css" />
+    <Content Include="Content\AdminLTE\css\AdminLTE.min.css">
+      <DependentUpon>AdminLTE.css</DependentUpon>
+    </Content>
     <Content Include="Content\AdminLTE\css\bootstrap-datepicker3.min.css" />
     <Content Include="Content\AdminLTE\css\bootstrap-select.css" />
     <Content Include="Content\AdminLTE\css\bootstrap-select.min.css" />
@@ -2098,6 +2103,7 @@
     <Content Include="Content\AdminLTE\js\Customer\serviceReport.js" />
     <Content Include="Content\AdminLTE\js\Customer\tablesDefault.js" />
     <Content Include="Content\AdminLTE\js\Customer\toastr.js" />
+    <Content Include="Content\AdminLTE\js\Customer\TrackingSatistic.js" />
     <Content Include="Content\AdminLTE\js\Customer\webcam.js" />
     <Content Include="Content\AdminLTE\js\Customer\webcam.min.js" />
     <Content Include="Content\AdminLTE\js\Customer\webcam.swf" />
@@ -5684,6 +5690,7 @@
     <Content Include="Views\Home\ResourceOwner.cshtml" />
     <Content Include="Views\RevenueHome\RevenueAllNoAgree1.cshtml" />
     <Content Include="Views\RevenueHome\RevenueAllNoAgree2.cshtml" />
+    <Content Include="Views\RevenueHome\TrackingStatistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5768,7 +5775,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64971</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64971/</IISUrl>
+          <IISUrl>http://localhost:8688/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
