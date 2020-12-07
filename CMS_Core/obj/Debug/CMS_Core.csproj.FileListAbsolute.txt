@@ -222,8 +222,8 @@ E:\Medlatec\Medcom_RevenueHome\CMS_Core\bin\Debug\System.Web.Razor.xml
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\bin\Debug\System.Web.WebPages.xml
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\bin\Debug\System.Web.WebPages.Deployment.xml
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\bin\Debug\System.Web.WebPages.Razor.xml
-E:\Medlatec\Medcom_RevenueHome\CMS_Core\obj\Debug\CMS_Core.csprojAssemblyReference.cache
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\obj\Debug\CMS_Core.csproj.CoreCompileInputs.cache
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\obj\Debug\CMS_Core.csproj.CopyComplete
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\obj\Debug\CMS_Core.dll
 E:\Medlatec\Medcom_RevenueHome\CMS_Core\obj\Debug\CMS_Core.pdb
+E:\Medlatec\Medcom_RevenueHome\CMS_Core\obj\Debug\CMS_Core.csprojAssemblyReference.cache

@@ -1,0 +1,40 @@
+﻿INFO 2020-12-07 04:15:39 – RevenueTotalAll:System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 10.0.0.5:6001
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Core.Common.HttpClientService.<GetAsync>d__9`1.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 81
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Medicons.Controllers.RevenueHomeController.<TrackingStatistic>d__50.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 4804
+INFO 2020-12-07 04:57:17 – RevenueTotalAll:System.AggregateException: One or more errors occurred. ---> System.ArgumentNullException: Value cannot be null.
+Parameter name: address
+   at CMS_Core.Common.HttpClientService.<GetToken>d__8.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 70
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Core.Common.HttpClientService.<GetClient>d__7.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 43
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at CMS_Core.Common.HttpClientService..ctor(String token, String authorityUrl, String clientId, String clientSecret, String scopes) in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 27
+   at CMS_Medicons.Controllers.RevenueHomeController.<TrackingStatistic>d__50.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMSLIS\Controllers\RevenueHomeController.cs:line 4803
+---> (Inner Exception #0) System.ArgumentNullException: Value cannot be null.
+Parameter name: address
+   at CMS_Core.Common.HttpClientService.<GetToken>d__8.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 70
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at CMS_Core.Common.HttpClientService.<GetClient>d__7.MoveNext() in E:\Medlatec\Medcom_RevenueHome\CMS_Core\Common\HttpClientService.cs:line 43<---
+

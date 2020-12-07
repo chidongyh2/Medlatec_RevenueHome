@@ -52,10 +52,9 @@ namespace CMS_Core.Common
             {
                 if (string.IsNullOrEmpty(_authorityUrls))
                     return null;
-
-                var disco = await DiscoveryClient.GetAsync(_authorityUrls);
-                if (disco.IsError)
-                    return null;
+                DiscoveryClient discoveryClient = new DiscoveryClient(_authorityUrls);
+                discoveryClient.Policy.RequireHttps = false;
+                var disco = await discoveryClient.GetAsync();
                 if (string.IsNullOrEmpty(_apiServiceInfo.ClientId) || string.IsNullOrEmpty(_apiServiceInfo.ClientSecret) || string.IsNullOrEmpty(_apiServiceInfo.Scopes))
                     return null;
 
