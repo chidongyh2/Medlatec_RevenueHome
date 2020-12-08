@@ -4814,6 +4814,25 @@ namespace CMS_Medicons.Controllers
             // Info.  
             return View();
         }
+
+        [HttpGet]
+        public ActionResult RevenueDetailByUser(string userId)
+        {
+            try
+            {
+                List<tblReportRevenue> Patients = imptbl_Patient.Gettbl_PatientByUserid(userId, 0, string.Empty);
+                var list = JsonConvert.SerializeObject(Patients, Formatting.None,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                });
+                return Content(list, "application/json");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
     }
