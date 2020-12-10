@@ -1,0 +1,82 @@
+﻿@using CMS_Core.Entity;
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@{
+
+    ViewBag.Title = "Biểu đồ theo dõi cán bộ tại nhà";
+    var UserInfo = ((cms_Account)Session["UserInfo"]);
+    var jsonSerializerSettings = new JsonSerializerSettings
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+}
+
+<!-- Begin Content -->
+<!-- Head Libs -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4mN9g2RKKBZiFc-cB8VIk03dPcmt9D-0&callback=initMap&libraries=&v=weekly"
+        defer></script>
+<!-- Begin Content -->
+
+<div class="box box-info">
+    <div class="box-body">
+        <!--The div element for the map -->
+        <div id="tracking-map"></div>
+    </div>
+</div>
+<!-- modal detail info-->
+<div class="modal fade" data-backdrop="static" id="modalDetailInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-table" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close close-icon" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalDetailInfoTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="sorting-table" class="table table-bordered table-striped dataTable overflow-auto" role="grid" style="width: 2400px;max-height:700px;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:160px;">Người thu</th>
+                                        <th style="width:160px;">Ngày thu</th>
+                                        <th style="width:170px;"> Nhóm doanh thu</th>
+                                        <th style="width:170px;"> Đơn vị</th>
+                                        <th style="width:140px;">SID</th>
+                                        <th style="width:200px;">Tên bệnh nhân</th>
+                                        <th style="width:120px;">Tổng tiền</th>
+                                        <th style="width:120px;">Giảm giá</th>
+                                        <th style="width:120px;">Phí đi lại</th>
+                                        <th style="width:120px;">BHTT</th>
+                                        <th style="width:120px;">BHBLTT</th>
+                                        <th style="width:120px;">Thực thu</th>
+                                        <th style="width:120px;">Tiền POS</th>
+                                        <th style="width:120px;">Trả trước</th>
+                                        <th style="width:120px;">Trả sau</th>
+                                        <th style="width:120px;">Tiền còn phải nộp</th>
+                                        <th style="width:200px;">Tiền cán bộ đồng ý</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="content-data">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>*@
+        </div>
+    </div>
+</div>
+<!-- end modal detail info -->
+<!-- End Content -->
+
+<script>
+    var locations = @(ViewBag.ListLocation != null ? Html.Raw(JsonConvert.SerializeObject(ViewBag.ListLocation, jsonSerializerSettings)) : "[]");
+</script>
+<script src="~/Content/AdminLTE/js/Customer/TrackingSatistic.js"></script>

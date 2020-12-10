@@ -16,7 +16,7 @@
                 text: locations[i].userFullName,
                 fontSize: '14px',
                 fontWeight: 'bold',
-                color: '#00c0ef'
+                color: '#007455'
             },
             icon: {
                 labelOrigin: new google.maps.Point(75, 32),
