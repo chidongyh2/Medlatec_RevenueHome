@@ -183,12 +183,24 @@ $(document).ready(function () {
             renderListUsers(listUsers);
         }
     });
+});
 
+function renderListUsers(users) {
+    $(".list-users").empty();
+    var htmlRender = '';
+    for (let i = 0; i < users.length; i++) {
+        var tempItem = `<li id="` + users[i].accountLis + `" class="item user-suggest">
+                                <label class="item-label">` + users[i].hoten + `</label>
+                                <i id="`+ users[i].accountLis +`" class="user-detail-actions fa fa-eye-slash ml-auto"></i>
+                            </li>`;
+        htmlRender += tempItem;
+    }
+    $(".list-users").append(htmlRender);
     $(".user-detail-actions").click(function (event) {
         var forgeryId = $("#forgeryToken").val();
         const clickedElement = $(event.target);
         const targetUserId = clickedElement.attr('id');
-        var user = listUsers.find(x => x.accountLis == targetUserId);
+        var user = users.find(x => x.accountLis == targetUserId);
         $(".spinner-loader").addClass("show");
         $.ajax({
             type: "GET",
@@ -214,19 +226,6 @@ $(document).ready(function () {
             }
         })
     });
-});
-
-function renderListUsers(users) {
-    $(".list-users").empty();
-    var htmlRender = '';
-    for (let i = 0; i < users.length; i++) {
-        var tempItem = `<li id="` + users[i].accountLis + `" class="item user-suggest">
-                                <label class="item-label">` + users[i].hoten + `</label>
-                                <i id="`+ users[i].accountLis +`" class="user-detail-actions fa fa-eye-slash ml-auto"></i>
-                            </li>`;
-        htmlRender += tempItem;
-    }
-    $(".list-users").append(htmlRender);
 }
 
 function stripVietnameseChars(str) {

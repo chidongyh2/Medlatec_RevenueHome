@@ -21,6 +21,26 @@
     <div class="box-body">
         <!--The div element for the map -->
         <div id="tracking-map"></div>
+        <div class="box-right user-suggestions">
+            <div class="widget-panel-toggle-button-container">
+                <button class="widget-pane-toggle-button" data-toggle="tooltip" data-placement="right" title="Danh sách cán bộ">
+                    <i id="users-navigate-tab" class="fa fa-chevron-right widget-pane-toggle-button-icon"></i>
+                </button>
+            </div>
+            <!--List user suggest -->
+            <div class="widget-pane-content-holder">
+                <h4 class="header-title">Danh sách cán bộ</h4>
+                <div class="input-group input-search-users">
+                    <input type="text" class="form-control" id="keyword" placeholder="Nhập tên user tìm kiếm" name="search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <ul class="list-users">
+                </ul>
+            </div>
+            <!-- end list user suggest-->
+        </div>
     </div>
 </div>
 <!-- modal detail info-->
@@ -33,7 +53,7 @@
                 </button>
                 <h4 class="modal-title" id="modalDetailInfoTitle"></h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="min-height:300px">
                 <section class="panel">
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -66,10 +86,6 @@
                     </div>
                 </section>
             </div>
-            @*<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>*@
         </div>
     </div>
 </div>
@@ -78,5 +94,6 @@
 
 <script>
     var locations = @(ViewBag.ListLocation != null ? Html.Raw(JsonConvert.SerializeObject(ViewBag.ListLocation, jsonSerializerSettings)) : "[]");
+    var accounts = @(ViewBag.Accounts != null ? Html.Raw(JsonConvert.SerializeObject(ViewBag.Accounts, jsonSerializerSettings)) : "[]");
 </script>
 <script src="~/Content/AdminLTE/js/Customer/TrackingSatistic.js"></script>

@@ -5212,3 +5212,75 @@ border-bottom-width: 0;
 .spinner-loader .show {
     display: block;
 }
+.box-right {
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+}
+.widget-pane-content-holder {
+    text-align: left;
+    position: absolute;
+    height: 85vh;
+    width: 258px;
+    background-color: #f0f0f0;
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    transition-property: -webkit-transform,transform,opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.0,0.0,0.2,1);
+    display: none;
+    overflow-y: auto;
+}
+.widget-pane-toggle-button {
+    width: 23px;
+    height: 48px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.9) 7px center/7px 10px no-repeat;
+    border: none;
+    outline: none;
+    border-left: 1px solid #D4D4D4;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+}
+.widget-panel-toggle-button-container {
+    position: absolute;
+    z-index: 0;
+    top: 90px;
+    left: 10px;
+}
+.widget-pane-toggle-button-icon {
+    width: 100%;
+    vertical-align: middle;
+}
+.widget-pane-content-holder > .header-title {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0px;
+    font-weight: bold;
+}
+.widget-pane-content-holder > .list-users {
+    align-items: center;
+    justify-content: flex-end; 
+    list-style-type: none;
+    padding: 0px;
+}
+.widget-pane-content-holder > .list-users > li {
+    font-size: 15px !important;
+    border-bottom: 1px solid !important;
+    color: #3f3f3f;
+    padding: 10px 15px;
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.widget-pane-content-holder > .list-users > li:hover {
+    background: #367fa9;
+    color: white;
+}
+.input-search-users {
+    margin: 0px 10px 15px 10px;
+}
