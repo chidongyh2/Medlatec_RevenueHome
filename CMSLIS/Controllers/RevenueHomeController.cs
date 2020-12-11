@@ -4802,6 +4802,9 @@ namespace CMS_Medicons.Controllers
                 var apiUrl = ConfigurationSettings.AppSettings["LOCATION_URL"];
                 var httpClient = new CMS_Core.Common.HttpClientService(token);
                 lstLocation = await httpClient.GetAsync<List<LocationHistoryViewModel>>($"{apiUrl}api/location/latestLocationUsers");
+                List<cms_Account> _Accounts = null;
+                _Accounts = impCms_Account.GetAll();
+                ViewBag.Accounts = _Accounts;
             }
             catch (Exception ex)
             {
